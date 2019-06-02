@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Labirinto Romano</title>
+	<style type="text/css">
+		@font-face {
+  			font-family: WadKingWN;
+  			src: url(font/WadKingWN.ttf);
+		}
+		body {
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+			word-break: break-word;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			background-color: #AAF3EC;
+			font-family: WadKingWN;
+		}
+		#menu {
+			width: 100vw;
+			height: 100vh;
+		}
+		.botao {
+			position: fixed;
+			height: 100px;
+			width: 300px;
+			border-radius: 25px;
+			font-family: WadKingWN;
+			color: white;
+			background-color: #FF6666;
+			cursor: pointer;
+		}
+		#botao_start {
+			top: 500px;
+			left: 0;
+			right: 0;
+			margin: auto;
+			font-size: 50px;
+		}
+		#botao_ok {
+			top: 500px;
+			left: 0;
+			right: 0;
+			margin: auto;
+			font-size: 50px;
+		}
+		#botao_back {
+			top: 500px;
+			left: 0;
+			right: 0;
+			margin: auto;
+			font-size: 50px;
+		}
+		#player1 {
+			position: fixed;
+			width: 68px;
+			height: 68px;
+			top: calc(100vh - 68px);
+			left: 0px;
+		}
+		#player2 {
+			position: fixed;
+			width: 68px;
+			height: 68px;
+			top: calc(100vh - 68px);
+			left: 1298px;
+		}
+		.tela {
+			float: left;
+			width: 50vw;
+			height: 100vh;
+		}
+		#caixa_texto {
+			position: fixed;
+			top: calc(50vh - 150px);
+			left: calc(50vw - 400px);
+			width: 700px;
+			height: 250px;
+			background-color: #FF6666;
+			color: white;
+			padding: 50px;
+			border-radius: 10px;
+		}
+		#titulo {
+			margin-top: -20px;
+			font-size: 40px;
+			text-align: center;
+		}
+		#texto {
+			font-size: 25px;
+		}
+		.status {
+			float: left;
+			width: 50vw;
+			height: calc(100vh - 544px);
+			font-size: 25px;
+		}
+		.vidas {
+			width: 150px;
+		}
+		.name {
+			margin: 25px;
+		}
+		.vidas {
+			margin: -15px 25px 25px 25px;
+		}
+		.casa {
+			float: left;
+			width: 66px;
+			height: 66px;
+			border: 1px solid white;
+			text-align: center;
+			line-height: 62px;
+			font-size: 15px;
+			color: #DBFAE9;
+			background-image: url("img/board/grama.png");
+			background-size: cover;
+		}
+		.porta {
+			background-image: url("img/board/porta.png");
+			background-size: cover;
+		}
+		.verde {
+			/*background-image: url("img/board/areia.png");
+			background-size: cover;*/
+		}
+		.vermelho {
+			background-image: url("img/board/muro.png");
+			background-size: cover;
+		}
+		.desativado {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="menu" class="menu">
+		<img id="logo" class="imagem" src="img/menu/logo.png">
+		<input id="botao_start" class="botao" type="button" value="start" onclick="start()">
+	</div>
+
+	<div id="regras" class="regras desativado">
+		<div id="caixa_texto">
+			<div id="titulo">RegRas</div>
+			<br/>
+			<div id="texto">o gaRoto deve aNdaR poR casas PaRes<br/><br/>a gaRota deve aNdaR PoR casas iMPaRes<br/><br/>queM eNcoNtRaR a saida PRiMeiRo gaNha<br/><br/>PeRde taMbeM queM ficaR seM vida</div>
+		</div>
+		<input id="botao_ok" class="botao" type="button" value="Ok" onclick="ok()">
+	</div>
+
+	<div id="partida" class="partida desativado">
+		<div id="status1" class="status">
+			<div id="name1" class="name">player i</div>
+			<img id="vidas1" class="vidas" src="img/status/vida5.png">
+		</div>
+
+		<div id="status2" class="status">
+			<div id="name2" class="name">player ii</div>
+			<img id="vidas2" class="vidas" src="img/status/vida5.png">
+		</div>
+
+		<div id="tela1" class="tela">
+			<div id="casa100" class="casa"></div>
+			<div id="casa101" class="casa"></div>
+			<div id="casa102" class="casa"></div>
+			<div id="casa103" class="casa"></div>
+			<div id="casa104" class="casa"></div>
+			<div id="casa105" class="casa"></div>
+			<div id="casa106" class="casa"></div>
+			<div id="casa107" class="casa"></div>
+			<div id="casa108" class="casa"></div>
+			<div id="casa109" class="casa porta"></div>
+
+			<div id="casa110" class="casa"></div>
+			<div id="casa111" class="casa"></div>
+			<div id="casa112" class="casa"></div>
+			<div id="casa113" class="casa"></div>
+			<div id="casa114" class="casa"></div>
+			<div id="casa115" class="casa"></div>
+			<div id="casa116" class="casa"></div>
+			<div id="casa117" class="casa"></div>
+			<div id="casa118" class="casa"></div>
+			<div id="casa119" class="casa"></div>
+
+			<div id="casa120" class="casa"></div>
+			<div id="casa121" class="casa"></div>
+			<div id="casa122" class="casa"></div>
+			<div id="casa123" class="casa"></div>
+			<div id="casa124" class="casa"></div>
+			<div id="casa125" class="casa"></div>
+			<div id="casa126" class="casa"></div>
+			<div id="casa127" class="casa"></div>
+			<div id="casa128" class="casa"></div>
+			<div id="casa129" class="casa"></div>
+
+			<div id="casa130" class="casa"></div>
+			<div id="casa131" class="casa"></div>
+			<div id="casa132" class="casa"></div>
+			<div id="casa133" class="casa"></div>
+			<div id="casa134" class="casa"></div>
+			<div id="casa135" class="casa"></div>
+			<div id="casa136" class="casa"></div>
+			<div id="casa137" class="casa"></div>
+			<div id="casa138" class="casa"></div>
+			<div id="casa139" class="casa"></div>
+
+			<div id="casa140" class="casa"></div>
+			<div id="casa141" class="casa"></div>
+			<div id="casa142" class="casa"></div>
+			<div id="casa143" class="casa"></div>
+			<div id="casa144" class="casa"></div>
+			<div id="casa145" class="casa"></div>
+			<div id="casa146" class="casa"></div>
+			<div id="casa147" class="casa"></div>
+			<div id="casa148" class="casa"></div>
+			<div id="casa149" class="casa"></div>
+
+			<div id="casa150" class="casa"></div>
+			<div id="casa151" class="casa"></div>
+			<div id="casa152" class="casa"></div>
+			<div id="casa153" class="casa"></div>
+			<div id="casa154" class="casa"></div>
+			<div id="casa155" class="casa"></div>
+			<div id="casa156" class="casa"></div>
+			<div id="casa157" class="casa"></div>
+			<div id="casa158" class="casa"></div>
+			<div id="casa159" class="casa"></div>
+
+			<div id="casa160" class="casa"></div>
+			<div id="casa161" class="casa"></div>
+			<div id="casa162" class="casa"></div>
+			<div id="casa163" class="casa"></div>
+			<div id="casa164" class="casa"></div>
+			<div id="casa165" class="casa"></div>
+			<div id="casa166" class="casa"></div>
+			<div id="casa167" class="casa"></div>
+			<div id="casa168" class="casa"></div>
+			<div id="casa169" class="casa"></div>
+
+			<div id="casa170" class="casa"></div>
+			<div id="casa171" class="casa"></div>
+			<div id="casa172" class="casa"></div>
+			<div id="casa173" class="casa"></div>
+			<div id="casa174" class="casa"></div>
+			<div id="casa175" class="casa"></div>
+			<div id="casa176" class="casa"></div>
+			<div id="casa177" class="casa"></div>
+			<div id="casa178" class="casa"></div>
+			<div id="casa179" class="casa"></div>
+
+			<img id="player1" class="player" src="img/player1/0.png">
+		</div>
+
+		<div id="tela2" class="tela">
+			<div id="casa200" class="casa porta"></div>
+			<div id="casa201" class="casa"></div>
+			<div id="casa202" class="casa"></div>
+			<div id="casa203" class="casa"></div>
+			<div id="casa204" class="casa"></div>
+			<div id="casa205" class="casa"></div>
+			<div id="casa206" class="casa"></div>
+			<div id="casa207" class="casa"></div>
+			<div id="casa208" class="casa"></div>
+			<div id="casa209" class="casa"></div>
+
+			<div id="casa210" class="casa"></div>
+			<div id="casa211" class="casa"></div>
+			<div id="casa212" class="casa"></div>
+			<div id="casa213" class="casa"></div>
+			<div id="casa214" class="casa"></div>
+			<div id="casa215" class="casa"></div>
+			<div id="casa216" class="casa"></div>
+			<div id="casa217" class="casa"></div>
+			<div id="casa218" class="casa"></div>
+			<div id="casa219" class="casa"></div>
+
+			<div id="casa220" class="casa"></div>
+			<div id="casa221" class="casa"></div>
+			<div id="casa222" class="casa"></div>
+			<div id="casa223" class="casa"></div>
+			<div id="casa224" class="casa"></div>
+			<div id="casa225" class="casa"></div>
+			<div id="casa226" class="casa"></div>
+			<div id="casa227" class="casa"></div>
+			<div id="casa228" class="casa"></div>
+			<div id="casa229" class="casa"></div>
+
+			<div id="casa230" class="casa"></div>
+			<div id="casa231" class="casa"></div>
+			<div id="casa232" class="casa"></div>
+			<div id="casa233" class="casa"></div>
+			<div id="casa234" class="casa"></div>
+			<div id="casa235" class="casa"></div>
+			<div id="casa236" class="casa"></div>
+			<div id="casa237" class="casa"></div>
+			<div id="casa238" class="casa"></div>
+			<div id="casa239" class="casa"></div>
+
+			<div id="casa240" class="casa"></div>
+			<div id="casa241" class="casa"></div>
+			<div id="casa242" class="casa"></div>
+			<div id="casa243" class="casa"></div>
+			<div id="casa244" class="casa"></div>
+			<div id="casa245" class="casa"></div>
+			<div id="casa246" class="casa"></div>
+			<div id="casa247" class="casa"></div>
+			<div id="casa248" class="casa"></div>
+			<div id="casa249" class="casa"></div>
+
+			<div id="casa250" class="casa"></div>
+			<div id="casa251" class="casa"></div>
+			<div id="casa252" class="casa"></div>
+			<div id="casa253" class="casa"></div>
+			<div id="casa254" class="casa"></div>
+			<div id="casa255" class="casa"></div>
+			<div id="casa256" class="casa"></div>
+			<div id="casa257" class="casa"></div>
+			<div id="casa258" class="casa"></div>
+			<div id="casa259" class="casa"></div>
+
+			<div id="casa260" class="casa"></div>
+			<div id="casa261" class="casa"></div>
+			<div id="casa262" class="casa"></div>
+			<div id="casa263" class="casa"></div>
+			<div id="casa264" class="casa"></div>
+			<div id="casa265" class="casa"></div>
+			<div id="casa266" class="casa"></div>
+			<div id="casa267" class="casa"></div>
+			<div id="casa268" class="casa"></div>
+			<div id="casa269" class="casa"></div>
+
+			<div id="casa270" class="casa"></div>
+			<div id="casa271" class="casa"></div>
+			<div id="casa272" class="casa"></div>
+			<div id="casa273" class="casa"></div>
+			<div id="casa274" class="casa"></div>
+			<div id="casa275" class="casa"></div>
+			<div id="casa276" class="casa"></div>
+			<div id="casa277" class="casa"></div>
+			<div id="casa278" class="casa"></div>
+			<div id="casa279" class="casa"></div>
+
+			<img id="player2" class="player" src="img/player2/0.png">
+		</div>
+	</div>
+
+	<div id="game_over" class="game_over desativado">
+		<img id="victory" class="imagem" src="img/menu/victory1.png">
+		<input id="botao_back" class="botao" type="button" value="back" onclick="voltar()">
+	</div>
+
+	<script type="text/javascript">
+		var img_wins = document.getElementById("victory");
+		var img_vidas = [0, document.getElementById("vidas1"), document.getElementById("vidas2")];
+		var menu = document.getElementById("menu");
+		var regras = document.getElementById("regras");
+		var partida = document.getElementById("partida");
+		var game_over = document.getElementById("game_over");
+
+		var estado = "menu";
+		var player1;
+		var player2;
+		var board1;
+		var board2;
+
+		document.body.onkeydown = function(e) { if (estado == "jogando") keyDown(e) };
+
+		function start() {
+			estado = "regras";
+			menu.classList.add("desativado");
+			regras.classList.remove("desativado");
+		}
+
+		function ok() {
+			estado = "jogando";
+			regras.classList.add("desativado");
+			partida.classList.remove("desativado");
+
+			board1 = new Board(1);
+			player1 = new Player("player1", board1);
+			board2 = new Board(2);
+			player2 = new Player("player2", board2);
+
+			board1.casa = [[0,0,0,0,0,2,2,2,0,3],
+	                  	   [0,0,0,0,0,2,0,2,2,2],
+	                       [0,0,0,0,0,2,0,0,0,0],
+	                       [0,0,0,0,0,2,0,0,0,0],
+	                       [2,2,2,0,0,2,0,0,0,0],
+	                       [2,0,2,0,0,2,0,0,0,0],
+	                       [2,2,2,2,2,2,0,0,0,0],
+	                       [1,2,0,0,0,0,0,0,0,0]];
+
+	        board2.casa = [[3,2,2,2,2,2,2,2,0,0],
+	                       [0,0,0,0,0,0,0,2,0,0],
+	                       [0,0,0,0,0,2,2,2,0,0],
+	                       [0,0,0,2,2,2,0,0,0,0],
+	                       [0,0,0,2,0,0,0,0,0,0],
+	                       [0,0,0,2,0,0,2,2,2,0],
+	                       [0,0,0,2,2,2,2,0,2,2],
+	                       [0,0,0,0,0,0,0,0,2,1]];
+
+	        board1.romano = [["liii","cxxi","dcci","ccix","dxxi","cxvi","cliv","lxii","dlxi",""],
+	                  	     ["cvii","dxli","clix","diii","cxlv","lxvi","dcli","clii","cxii","xlii"],
+	                         ["cxli","ccli","cxcv","dcix","xvii","xcii","dvii","cclv","clxv","dxlv"],
+	                         ["cdix","dxcv","xxxv","lxix","lvii","clvi","xxix","dcxv","cxci","cdxi"],
+	                         ["clxx","lxiv","xlvi","ccci","dxix","cxiv","dxxv","cccv","xlix","cdlv"],
+	                         ["xxiv","xcix","xciv","dxci","lxxv","lxxx","clxi","ccxi","dclv","xxxi"],
+	                         ["xxii","xxvi","ccii","xcvi","cxxx","xliv","dcxi","xiii","ccxv","dlxv"],
+	                         ["","viii","dlix","cdxv","cxxv","dccv","ciii","cxix","cdli","lxxi"]];
+
+	        board2.romano = [["","xxxi","lxxv","cxli","cvii","xlix","ccxi","cxxi","dliv","xxiv"],
+	                         ["xlvi","dclx","xciv","xxvi","xcii","dcvi","cdvi","cxlv","cccl","cdxl"],
+	                         ["cliv","cdii","xcvi","cxvi","lxii","ccix","clix","xxxv","xliv","dxvi"],
+	                         ["ccxc","cccx","xxii","ciii","lxxi","lvii","cdxx","clxx","dcxx","lxiv"],
+	                         ["lxvi","dciv","cxiv","cxci","dxxx","xlii","ccvi","dcii","cxii","dxii"],
+	                         ["dxiv","lxxx","cdxc","cxxv","cciv","cdlx","clxv","clxi","xcix","ccxl"],
+	                         ["clvi","ccxx","ccii","liii","cxcv","cxix","lxix","dcxl","xxix","xvii"],
+	                         ["viii","dlxx","clii","dlii","cclx","cxxx","dlvi","cdiv","xiii",""]];
+
+			for (let i = 0; i < 8; i++) {
+				for (let j = 0; j < 10; j++) {
+					document.getElementById("casa1" + i + j).innerHTML = board1.romano[i][j];
+				}
+			}
+			for (let i = 0; i < 8; i++) {
+				for (let j = 0; j < 10; j++) {
+					document.getElementById("casa2" + i + j).innerHTML = board2.romano[i][j];
+				}
+			}
+		}
+
+		function gameOver(campo, resultado) {
+			if (resultado == "vitoria") {
+				img_wins.src = "img/menu/victory" + campo.id + ".png";
+			}
+			else {
+				img_wins.src = "img/menu/victory" + (3 - campo.id) + ".png";
+			}
+			estado = "game_over";
+			partida.classList.add("desativado");
+			game_over.classList.remove("desativado");
+
+			for (let k = 1; k < 3; k++) {
+				for (let i = 0; i < 8; i++) {
+					for (let j = 0; j < 10; j++) {
+						document.getElementById("casa" + k + i + j).innerHTML = "";
+						document.getElementById("casa" + k + i + j).classList.remove("verde");
+						document.getElementById("casa" + k + i + j).classList.remove("vermelho");
+					}
+				}
+				img_vidas[k].src = "img/status/vida5.png";
+			}
+		}
+
+		function voltar() {
+			menu.classList.remove("desativado");
+			game_over.classList.add("desativado");
+		}
+
+		function keyDown(e) {
+			switch (e.key) {
+				case "ArrowUp":
+					if (player2.y > 0) {
+						player2.moveUp();
+					}
+					break;
+				case "w":
+					if (player1.y > 0) {
+						player1.moveUp();
+					}
+					break;
+				case "ArrowLeft":
+					if (player2.x > 0) {
+						player2.moveLeft();
+					}
+					break;
+				case "a":
+					if (player1.x > 0) {
+						player1.moveLeft();
+					}
+					break;
+				case "ArrowRight":
+					if (player2.x < 9) {
+						player2.moveRight();
+					}
+					break;
+				case "d":
+					if (player1.x < 9) {
+						player1.moveRight();
+					}
+					break;
+				case "ArrowDown":
+					if (player2.y < 7) {
+						player2.moveDown();
+					}
+					break;
+				case "s":
+					if (player1.y < 7) {
+						player1.moveDown();
+					}
+					break;
+			}
+		}
+
+		function Board(id) {
+			let that = this;
+			this.id = id;
+			this.player;
+			this.pixel = 68;
+			this.casa;
+			this.romano;
+		    this.revelar = function() {
+		    	document.getElementById("casa" + that.id + that.player.y + that.player.x).innerHTML = "";
+
+		    	if (that.casa[that.player.y][that.player.x] == 2) {
+		    		document.getElementById("casa" + that.id + that.player.y + that.player.x).classList.add("verde");
+		    	}
+		    	else if (that.casa[that.player.y][that.player.x] == 0) {
+		    		document.getElementById("casa" + that.id + that.player.y + that.player.x).classList.add("vermelho");
+		    		that.player.vidas--;
+		    		img_vidas[that.id].src = "img/status/vida" + that.player.vidas + ".png";
+		    		that.player.respawn();
+		    		if (that.player.vidas <= 0) gameOver(that, "derrota");
+		    	}
+		    	else if (that.casa[that.player.y][that.player.x] == 3) {
+		    		gameOver(that, "vitoria");
+		    	}
+		    }
+		}
+
+		function Player(name, board) {
+			let that = this;
+			this.board = board;
+			that.board.player = that;
+			this.html = document.getElementById(name);
+			this.x = (that.html.offsetLeft - 686 * (that.board.id - 1)) / 68;
+			this.y = (that.html.offsetTop - document.body.clientHeight + 544) / 68;
+			this.vidas = 5;
+			this.respawn = function() {
+				that.html.style.top = "calc(100vh - 68px)";
+				that.html.style.left = (that.board.id - 1) * 1298 + "px";
+
+				that.x = (that.html.offsetLeft - 686 * (that.board.id - 1)) / 68;
+				that.y = (that.html.offsetTop - document.body.clientHeight + 544) / 68;
+			}
+			that.respawn();
+			this.moveUp = function() {
+				that.html.style.top = that.html.offsetTop - that.board.pixel + "px";
+				that.y--;
+				that.board.revelar();
+			}
+			this.moveLeft = function() {
+				that.html.style.left = that.html.offsetLeft - that.board.pixel + "px";
+				that.x--;
+				that.board.revelar();
+			}
+			this.moveRight = function() {
+				that.html.style.left = that.html.offsetLeft + that.board.pixel + "px";
+				that.x++;
+				that.board.revelar();
+			}
+			this.moveDown = function() {
+				that.html.style.top = that.html.offsetTop + that.board.pixel + "px";
+				that.y++;
+				that.board.revelar();
+			}
+		}
+	</script>
+</body>
+</html>
