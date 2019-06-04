@@ -76,13 +76,13 @@
 		#caixa_texto {
 			position: fixed;
 			top: calc(50vh - 150px);
-			left: calc(50vw - 400px);
-			width: 700px;
+			left: calc(50vw - 600px);
+			width: 1100px;
 			height: 250px;
 			background-color: #FF6666;
 			color: white;
-			padding: 50px;
-			border-radius: 10px;
+			padding: 50px 40px 50px 40px;
+			border-radius: 30px;
 		}
 		#titulo {
 			margin-top: -20px;
@@ -137,6 +137,7 @@
 	</style>
 </head>
 <body>
+	<div id="preload" class="desativado"><img src="img/board/muro.png"><img src="img/board/porta.png"><img src="img/board/grama.png"><img src="img/menu/logo.png"><img src="img/menu/victory1.png"><img src="img/menu/victory2.png"><img src="img/player1/0.png"><img src="img/player2/0.png"><img src="img/status/vida0.png"><img src="img/status/vida1.png"><img src="img/status/vida2.png"><img src="img/status/vida3.png"><img src="img/status/vida4.png"><img src="img/status/vida5.png"></div>
 	<div id="menu" class="menu">
 		<img id="logo" class="imagem" src="img/menu/logo.png">
 		<input id="botao_start" class="botao" type="button" value="start" onclick="start()">
@@ -146,7 +147,8 @@
 		<div id="caixa_texto">
 			<div id="titulo">RegRas</div>
 			<br/>
-			<div id="texto">o gaRoto deve aNdaR poR casas PaRes<br/><br/>a gaRota deve aNdaR PoR casas iMPaRes<br/><br/>queM eNcoNtRaR a saida PRiMeiRo gaNha<br/><br/>PeRde taMbeM queM ficaR seM vida</div>
+			<br/>
+			<div id="texto">o gaRoto deve aNdaR poR casas PaRes com as teclas Wasd<br/><br/>a gaRota deve aNdaR PoR casas iMPaRes coM as setas do teclado<br/><br/>queM eNcoNtRaR a saida PRiMeiRo gaNha<br/><br/>PeRde taMbeM queM ficaR seM vida</div>
 		</div>
 		<input id="botao_ok" class="botao" type="button" value="Ok" onclick="ok()">
 	</div>
@@ -463,42 +465,42 @@
 		function keyDown(e) {
 			switch (e.key) {
 				case "ArrowUp":
-					if (player2.y > 0) {
+					if (player2.y > 0 && document.getElementById("casa2" + (player2.y - 1) + player2.x).classList.contains("vermelho") == false) {
 						player2.moveUp();
 					}
 					break;
 				case "w":
-					if (player1.y > 0) {
+					if (player1.y > 0 && document.getElementById("casa1" + (player1.y - 1) + player1.x).classList.contains("vermelho") == false) {
 						player1.moveUp();
 					}
 					break;
 				case "ArrowLeft":
-					if (player2.x > 0) {
+					if (player2.x > 0 && document.getElementById("casa2" + player2.y + (player2.x - 1)).classList.contains("vermelho") == false) {
 						player2.moveLeft();
 					}
 					break;
 				case "a":
-					if (player1.x > 0) {
+					if (player1.x > 0 && document.getElementById("casa1" + player1.y + (player1.x - 1)).classList.contains("vermelho") == false) {
 						player1.moveLeft();
 					}
 					break;
 				case "ArrowRight":
-					if (player2.x < 9) {
+					if (player2.x < 9 && document.getElementById("casa2" + player2.y + (player2.x + 1)).classList.contains("vermelho") == false) {
 						player2.moveRight();
 					}
 					break;
 				case "d":
-					if (player1.x < 9) {
+					if (player1.x < 9 && document.getElementById("casa1" + player1.y + (player1.x + 1)).classList.contains("vermelho") == false) {
 						player1.moveRight();
 					}
 					break;
 				case "ArrowDown":
-					if (player2.y < 7) {
+					if (player2.y < 7 && document.getElementById("casa2" + (player2.y + 1) + player2.x).classList.contains("vermelho") == false) {
 						player2.moveDown();
 					}
 					break;
 				case "s":
-					if (player1.y < 7) {
+					if (player1.y < 7 && document.getElementById("casa1" + (player1.y + 1) + player1.x).classList.contains("vermelho") == false) {
 						player1.moveDown();
 					}
 					break;
@@ -513,13 +515,14 @@
 			this.casa;
 			this.romano;
 		    this.revelar = function() {
-		    	document.getElementById("casa" + that.id + that.player.y + that.player.x).innerHTML = "";
+		    	let elemento = document.getElementById("casa" + that.id + that.player.y + that.player.x);
+		    	elemento.innerHTML = "";
 
 		    	if (that.casa[that.player.y][that.player.x] == 2) {
-		    		document.getElementById("casa" + that.id + that.player.y + that.player.x).classList.add("verde");
+		    		elemento.classList.add("verde");
 		    	}
 		    	else if (that.casa[that.player.y][that.player.x] == 0) {
-		    		document.getElementById("casa" + that.id + that.player.y + that.player.x).classList.add("vermelho");
+		    		elemento.classList.add("vermelho");
 		    		that.player.vidas--;
 		    		img_vidas[that.id].src = "img/status/vida" + that.player.vidas + ".png";
 		    		that.player.respawn();
