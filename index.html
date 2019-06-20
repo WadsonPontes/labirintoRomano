@@ -463,8 +463,8 @@
 		}
 
 		function keyDown(e) {
-			switch (e.key) {
-				case "ArrowUp":
+			switch (e.key.toLowerCase()) {
+				case "arrowup":
 					if (player2.y > 0 && document.getElementById("casa2" + (player2.y - 1) + player2.x).classList.contains("vermelho") == false) {
 						player2.moveUp();
 					}
@@ -474,7 +474,7 @@
 						player1.moveUp();
 					}
 					break;
-				case "ArrowLeft":
+				case "arrowleft":
 					if (player2.x > 0 && document.getElementById("casa2" + player2.y + (player2.x - 1)).classList.contains("vermelho") == false) {
 						player2.moveLeft();
 					}
@@ -484,7 +484,7 @@
 						player1.moveLeft();
 					}
 					break;
-				case "ArrowRight":
+				case "arrowright":
 					if (player2.x < 9 && document.getElementById("casa2" + player2.y + (player2.x + 1)).classList.contains("vermelho") == false) {
 						player2.moveRight();
 					}
@@ -494,7 +494,7 @@
 						player1.moveRight();
 					}
 					break;
-				case "ArrowDown":
+				case "arrowdown":
 					if (player2.y < 7 && document.getElementById("casa2" + (player2.y + 1) + player2.x).classList.contains("vermelho") == false) {
 						player2.moveDown();
 					}
