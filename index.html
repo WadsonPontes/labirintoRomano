@@ -475,26 +475,264 @@
 		class Tabuleiro {
 			constructor(id) {
 				this.id = id;
-				this.celulas = [];
+				if (id) {
+					this.celulas = [
+						[
+							new Celula(id, 0, 0, 'muro', ''),
+							new Celula(id, 0, 1, 'porta', ''),
+							new Celula(id, 0, 2, 'muro', ''),
+							new Celula(id, 0, 3, 'muro', ''),
+							new Celula(id, 0, 4, 'muro', ''),
+							new Celula(id, 0, 5, 'muro', ''),
+							new Celula(id, 0, 6, 'muro', ''),
+							new Celula(id, 0, 7, 'muro', ''),
+							new Celula(id, 0, 8, 'muro', ''),
+							new Celula(id, 0, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 1, 0, 'muro', ''),
+							new Celula(id, 1, 1, 'grama', 'MI'),
+							new Celula(id, 1, 2, 'muro', 'VI'),
+							new Celula(id, 1, 3, 'muro', 'XL'),
+							new Celula(id, 1, 4, 'muro', 'CD'),
+							new Celula(id, 1, 5, 'grama', 'IX'),
+							new Celula(id, 1, 6, 'grama', ''),
+							new Celula(id, 1, 7, 'grama', ''),
+							new Celula(id, 1, 8, 'muro', 'IV'),
+							new Celula(id, 1, 9, 'muro', 'II')
+						],
+						[
+							new Celula(id, 2, 0, 'muro', ''),
+							new Celula(id, 2, 1, 'grama', ''),
+							new Celula(id, 2, 2, 'grama', ''),
+							new Celula(id, 2, 3, 'grama', ''),
+							new Celula(id, 2, 4, 'grama', ''),
+							new Celula(id, 2, 5, 'grama', ''),
+							new Celula(id, 2, 6, 'muro', ''),
+							new Celula(id, 2, 7, 'grama', ''),
+							new Celula(id, 2, 8, 'grama', ''),
+							new Celula(id, 2, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 3, 0, 'muro', ''),
+							new Celula(id, 3, 1, 'muro', ''),
+							new Celula(id, 3, 2, 'muro', ''),
+							new Celula(id, 3, 3, 'muro', ''),
+							new Celula(id, 3, 4, 'muro', ''),
+							new Celula(id, 3, 5, 'muro', ''),
+							new Celula(id, 3, 6, 'muro', ''),
+							new Celula(id, 3, 7, 'muro', ''),
+							new Celula(id, 3, 8, 'grama', ''),
+							new Celula(id, 3, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 4, 0, 'muro', ''),
+							new Celula(id, 4, 1, 'grama', ''),
+							new Celula(id, 4, 2, 'grama', ''),
+							new Celula(id, 4, 3, 'grama', ''),
+							new Celula(id, 4, 4, 'grama', ''),
+							new Celula(id, 4, 5, 'grama', ''),
+							new Celula(id, 4, 6, 'grama', ''),
+							new Celula(id, 4, 7, 'grama', ''),
+							new Celula(id, 4, 8, 'grama', ''),
+							new Celula(id, 4, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 5, 0, 'muro', ''),
+							new Celula(id, 5, 1, 'grama', ''),
+							new Celula(id, 5, 2, 'muro', ''),
+							new Celula(id, 5, 3, 'muro', ''),
+							new Celula(id, 5, 4, 'muro', ''),
+							new Celula(id, 5, 5, 'muro', ''),
+							new Celula(id, 5, 6, 'muro', ''),
+							new Celula(id, 5, 7, 'muro', ''),
+							new Celula(id, 5, 8, 'muro', ''),
+							new Celula(id, 5, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 6, 0, 'muro', ''),
+							new Celula(id, 6, 1, 'grama', ''),
+							new Celula(id, 6, 2, 'grama', ''),
+							new Celula(id, 6, 3, 'grama', ''),
+							new Celula(id, 6, 4, 'grama', ''),
+							new Celula(id, 6, 5, 'muro', ''),
+							new Celula(id, 6, 6, 'grama', ''),
+							new Celula(id, 6, 7, 'grama', ''),
+							new Celula(id, 6, 8, 'grama', ''),
+							new Celula(id, 6, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 7, 0, 'muro', ''),
+							new Celula(id, 7, 1, 'muro', ''),
+							new Celula(id, 7, 2, 'grama', ''),
+							new Celula(id, 7, 3, 'muro', ''),
+							new Celula(id, 7, 4, 'grama', ''),
+							new Celula(id, 7, 5, 'muro', ''),
+							new Celula(id, 7, 6, 'grama', ''),
+							new Celula(id, 7, 7, 'muro', ''),
+							new Celula(id, 7, 8, 'grama', ''),
+							new Celula(id, 7, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 8, 0, 'muro', ''),
+							new Celula(id, 8, 1, 'grama', ''),
+							new Celula(id, 8, 2, 'grama', ''),
+							new Celula(id, 8, 3, 'muro', ''),
+							new Celula(id, 8, 4, 'grama', ''),
+							new Celula(id, 8, 5, 'grama', ''),
+							new Celula(id, 8, 6, 'grama', ''),
+							new Celula(id, 8, 7, 'muro', ''),
+							new Celula(id, 8, 8, 'grama', ''),
+							new Celula(id, 8, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 9, 0, 'muro', ''),
+							new Celula(id, 9, 1, 'muro', ''),
+							new Celula(id, 9, 2, 'muro', ''),
+							new Celula(id, 9, 3, 'muro', ''),
+							new Celula(id, 9, 4, 'muro', ''),
+							new Celula(id, 9, 5, 'muro', ''),
+							new Celula(id, 9, 6, 'muro', ''),
+							new Celula(id, 9, 7, 'muro', ''),
+							new Celula(id, 9, 8, 'muro', ''),
+							new Celula(id, 9, 9, 'muro', '')
+						]
+					];
+				}
+				else {
+					this.celulas = [
+						[
+							new Celula(id, 0, 0, 'muro', ''),
+							new Celula(id, 0, 1, 'muro', ''),
+							new Celula(id, 0, 2, 'muro', ''),
+							new Celula(id, 0, 3, 'muro', ''),
+							new Celula(id, 0, 4, 'muro', ''),
+							new Celula(id, 0, 5, 'muro', ''),
+							new Celula(id, 0, 6, 'muro', ''),
+							new Celula(id, 0, 7, 'muro', ''),
+							new Celula(id, 0, 8, 'porta', ''),
+							new Celula(id, 0, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 1, 0, 'muro', ''),
+							new Celula(id, 1, 1, 'grama', ''),
+							new Celula(id, 1, 2, 'grama', ''),
+							new Celula(id, 1, 3, 'grama', ''),
+							new Celula(id, 1, 4, 'muro', ''),
+							new Celula(id, 1, 5, 'muro', ''),
+							new Celula(id, 1, 6, 'muro', ''),
+							new Celula(id, 1, 7, 'muro', ''),
+							new Celula(id, 1, 8, 'grama', ''),
+							new Celula(id, 1, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 2, 0, 'muro', ''),
+							new Celula(id, 2, 1, 'grama', ''),
+							new Celula(id, 2, 2, 'muro', ''),
+							new Celula(id, 2, 3, 'grama', ''),
+							new Celula(id, 2, 4, 'grama', ''),
+							new Celula(id, 2, 5, 'grama', ''),
+							new Celula(id, 2, 6, 'grama', ''),
+							new Celula(id, 2, 7, 'grama', ''),
+							new Celula(id, 2, 8, 'grama', ''),
+							new Celula(id, 2, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 3, 0, 'muro', ''),
+							new Celula(id, 3, 1, 'grama', ''),
+							new Celula(id, 3, 2, 'muro', ''),
+							new Celula(id, 3, 3, 'muro', ''),
+							new Celula(id, 3, 4, 'muro', ''),
+							new Celula(id, 3, 5, 'muro', ''),
+							new Celula(id, 3, 6, 'muro', ''),
+							new Celula(id, 3, 7, 'muro', ''),
+							new Celula(id, 3, 8, 'muro', ''),
+							new Celula(id, 3, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 4, 0, 'muro', ''),
+							new Celula(id, 4, 1, 'grama', ''),
+							new Celula(id, 4, 2, 'grama', ''),
+							new Celula(id, 4, 3, 'grama', ''),
+							new Celula(id, 4, 4, 'grama', ''),
+							new Celula(id, 4, 5, 'grama', ''),
+							new Celula(id, 4, 6, 'grama', ''),
+							new Celula(id, 4, 7, 'grama', ''),
+							new Celula(id, 4, 8, 'grama', ''),
+							new Celula(id, 4, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 5, 0, 'muro', ''),
+							new Celula(id, 5, 1, 'muro', ''),
+							new Celula(id, 5, 2, 'grama', ''),
+							new Celula(id, 5, 3, 'muro', ''),
+							new Celula(id, 5, 4, 'muro', ''),
+							new Celula(id, 5, 5, 'muro', ''),
+							new Celula(id, 5, 6, 'muro', ''),
+							new Celula(id, 5, 7, 'muro', ''),
+							new Celula(id, 5, 8, 'grama', ''),
+							new Celula(id, 5, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 6, 0, 'muro', ''),
+							new Celula(id, 6, 1, 'grama', ''),
+							new Celula(id, 6, 2, 'grama', ''),
+							new Celula(id, 6, 3, 'muro', ''),
+							new Celula(id, 6, 4, 'grama', ''),
+							new Celula(id, 6, 5, 'grama', ''),
+							new Celula(id, 6, 6, 'grama', ''),
+							new Celula(id, 6, 7, 'muro', ''),
+							new Celula(id, 6, 8, 'grama', ''),
+							new Celula(id, 6, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 7, 0, 'muro', ''),
+							new Celula(id, 7, 1, 'muro', ''),
+							new Celula(id, 7, 2, 'muro', ''),
+							new Celula(id, 7, 3, 'muro', ''),
+							new Celula(id, 7, 4, 'grama', ''),
+							new Celula(id, 7, 5, 'muro', ''),
+							new Celula(id, 7, 6, 'grama', ''),
+							new Celula(id, 7, 7, 'muro', ''),
+							new Celula(id, 7, 8, 'grama', ''),
+							new Celula(id, 7, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 8, 0, 'muro', ''),
+							new Celula(id, 8, 1, 'grama', ''),
+							new Celula(id, 8, 2, 'grama', ''),
+							new Celula(id, 8, 3, 'grama', ''),
+							new Celula(id, 8, 4, 'grama', ''),
+							new Celula(id, 8, 5, 'muro', ''),
+							new Celula(id, 8, 6, 'grama', ''),
+							new Celula(id, 8, 7, 'grama', ''),
+							new Celula(id, 8, 8, 'grama', ''),
+							new Celula(id, 8, 9, 'muro', '')
+						],
+						[
+							new Celula(id, 9, 0, 'muro', ''),
+							new Celula(id, 9, 1, 'muro', ''),
+							new Celula(id, 9, 2, 'muro', ''),
+							new Celula(id, 9, 3, 'muro', ''),
+							new Celula(id, 9, 4, 'muro', ''),
+							new Celula(id, 9, 5, 'muro', ''),
+							new Celula(id, 9, 6, 'muro', ''),
+							new Celula(id, 9, 7, 'muro', ''),
+							new Celula(id, 9, 8, 'muro', ''),
+							new Celula(id, 9, 9, 'muro', '')
+						]
+					];
+				}
+				
 				elementos.celulas[id] = [];
 
 				for (let i = 0; i < 10; ++i) {
-					this.celulas[i] = [];
 					elementos.celulas[id][i] = [];
 
 					for (let j = 0; j < 10; ++j) {
 						elementos.celulas[id][i][j] = document.querySelector(`#c-${id}-${i}-${j}`);
-						this.celulas[i][j] = new Celula(id, i, j, (i == 0 || j == 0 || i == 9 || j == 9 ? 'muro2': 'grama'), (i == 0 || j == 0 || i == 9 || j == 9 ? '': ''));
 						this.celulas[i][j].atualizar();
 					}
-				}
-				if (this.id) {
-					this.celulas[0][1].tipo = 'porta3';
-					this.celulas[0][1].atualizar();
-				}
-				else {
-					this.celulas[0][8].tipo = 'porta3';
-					this.celulas[0][8].atualizar();
 				}
 			}
 		}
@@ -502,8 +740,8 @@
 		class Jogador {
 			constructor(id) {
 				this.id = id;
-				this.x = 1;
-				this.y = 3;
+				this.x = id ? 8 : 1;
+				this.y = 8;
 				this.direcao = id ? -1 : 1;
 				this.tabuleiro = new Tabuleiro(id);
 				this.vidas = 5;
@@ -522,8 +760,6 @@
 
 			atualizar() {
 				const e = elementos.jogadores[this.id];
-				const d = this.duracao/1000;
-				e.style.transition = `top ${d}s linear, left ${d}s linear, right ${d}s linear, bottom ${d}s linear`;
 				e.style.transform = `scaleX(${this.direcao})`;
 				if (this.id) e.style.right = `calc(min(${(9 - this.x) * 5}vw, ${(9 - this.x) * 10}vh))`;
 				else e.style.left = `calc(min(${(this.x) * 5}vw, ${this.x * 10}vh))`;
@@ -531,13 +767,19 @@
 			}
 
 			andar(tecla) {
+				const e = elementos.jogadores[this.id];
+				const d = this.duracao/1000;
 				this.x += tecla.x;
 				this.y += tecla.y;
 				if (tecla.x) this.direcao = tecla.x;
 				this.estado = 'andando';
+				e.style.transition = `top ${d}s linear, left ${d}s linear, right ${d}s linear, bottom ${d}s linear`;
 				this.atualizar();
-				elementos.jogadores[this.id].animate(this.keyframes, this.timing);
-				setTimeout(() => this.estado = 'parado', this.duracao);
+				e.animate(this.keyframes, this.timing);
+				setTimeout(() => {
+					this.estado = 'parado';
+					e.style.transition = 'none';
+				}, this.duracao);
 			}
 		}
 

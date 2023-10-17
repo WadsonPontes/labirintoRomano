@@ -1,0 +1,52 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            let qtd_digitos = {
+                1: [],
+                2: [],
+                3: [],
+                4: [],
+                5: [],
+                6: [],
+                7: [],
+                8: [],
+                9: []
+            };
+            let letras = [
+                { id: 0, valor: 1, letra: 'I'},
+                { id: 1, valor: 5, letra: 'V'},
+                { id: 2, valor: 10, letra: 'X'},
+                { id: 3, valor: 50, letra: 'L'},
+                { id: 4, valor: 100, letra: 'C'},
+                { id: 5, valor: 500, letra: 'D'},
+                { id: 6, valor: 1000, letra: 'M'}
+            ];
+            let id_letra = 0;
+
+            for (let i = 1; i <= 1000; ++i) {
+                let montante = 0;
+
+                for (let j = id_letra; j >= 0; --j) {
+                    for (let k = 1; k <= 3; ++k) {
+                        if (montante == i) {
+                            break;
+                        }
+
+                        if (montante + k * letras[j] <= i) {
+                            montante
+                        }
+                    }
+
+                    if (montante == i) {
+                        break;
+                    }
+                }
+            }
+
+            console.log(qtd_digitos);
+        </script>
+    </body>
+</html>
