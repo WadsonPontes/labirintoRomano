@@ -13,40 +13,89 @@
                 6: [],
                 7: [],
                 8: [],
-                9: []
+                9: [],
+                10: [],
+                11: [],
+                12: [],
+                13: [],
+                14: [],
+                15: [],
+                16: [],
+                17: [],
+                18: [],
+                19: [],
+                20: [],
             };
+            let pares3 = [];
+            let impares3 = [];
             let letras = [
-                { id: 0, valor: 1, letra: 'I'},
-                { id: 1, valor: 5, letra: 'V'},
-                { id: 2, valor: 10, letra: 'X'},
-                { id: 3, valor: 50, letra: 'L'},
-                { id: 4, valor: 100, letra: 'C'},
-                { id: 5, valor: 500, letra: 'D'},
-                { id: 6, valor: 1000, letra: 'M'}
+                [
+                    { valor: 0, letra: '' },
+                    { valor: 1, letra: 'I' },
+                    { valor: 2, letra: 'II' },
+                    { valor: 3, letra: 'III' },
+                    { valor: 4, letra: 'IV' },
+                    { valor: 5, letra: 'V' },
+                    { valor: 6, letra: 'VI' },
+                    { valor: 7, letra: 'VII' },
+                    { valor: 8, letra: 'VIII' },
+                    { valor: 9, letra: 'IX' },
+                ],
+                [
+                    { valor: 0, letra: '' },
+                    { valor: 10, letra: 'X' },
+                    { valor: 20, letra: 'XX' },
+                    { valor: 30, letra: 'XXX' },
+                    { valor: 40, letra: 'XL' },
+                    { valor: 50, letra: 'L' },
+                    { valor: 60, letra: 'LX' },
+                    { valor: 70, letra: 'LXX' },
+                    { valor: 80, letra: 'LXXX' },
+                    { valor: 90, letra: 'XC' },
+                ],
+                [
+                    { valor: 0, letra: '' },
+                    { valor: 100, letra: 'C' },
+                    { valor: 200, letra: 'CC' },
+                    { valor: 300, letra: 'CCC' },
+                    { valor: 400, letra: 'CD' },
+                    { valor: 500, letra: 'D' },
+                    { valor: 600, letra: 'DC' },
+                    { valor: 700, letra: 'DCC' },
+                    { valor: 800, letra: 'DCCC' },
+                    { valor: 900, letra: 'CM' },
+                ],
+                [
+                    { valor: 0, letra: '' },
+                    { valor: 1000, letra: 'M' },
+                    { valor: 2000, letra: 'MM' },
+                    { valor: 3000, letra: 'MMM' },
+                ],
             ];
-            let id_letra = 0;
 
-            for (let i = 1; i <= 1000; ++i) {
-                let montante = 0;
+            for (let i = 1; i <= 3999; ++i) {
+                let montante = {valor: i, letras: '', qtd_digitos: 0, par: i % 2 == 0};
 
-                for (let j = id_letra; j >= 0; --j) {
-                    for (let k = 1; k <= 3; ++k) {
-                        if (montante == i) {
-                            break;
-                        }
-
-                        if (montante + k * letras[j] <= i) {
-                            montante
-                        }
-                    }
-
-                    if (montante == i) {
-                        break;
-                    }
+                while (montante.valor) {
+                    let unidade = montante.valor % 10;
+                    montante.valor = Math.floor(montante.valor / 10);
+                    montante.letras = letras[montante.qtd_digitos][unidade].letra + montante.letras;
+                    ++montante.qtd_digitos;
+                }
+                montante.qtd_digitos = montante.letras.length;
+                montante.valor = i;
+                qtd_digitos[montante.qtd_digitos].push(montante);
+                if (montante.qtd_digitos < 4 && montante.par) {
+                    pares3.push(montante.letras);
+                }
+                else if (montante.qtd_digitos < 4 && !montante.par) {
+                    impares3.push(montante.letras);
                 }
             }
 
             console.log(qtd_digitos);
+            console.log(pares3);
+            console.log(impares3);
         </script>
     </body>
 </html>

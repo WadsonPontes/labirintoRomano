@@ -475,6 +475,7 @@
 		class Tabuleiro {
 			constructor(id) {
 				this.id = id;
+				this.romanos = this.getRomanos();
 				if (id) {
 					this.celulas = [
 						[
@@ -491,98 +492,98 @@
 						],
 						[
 							new Celula(id, 1, 0, 'muro', ''),
-							new Celula(id, 1, 1, 'grama', 'MI'),
-							new Celula(id, 1, 2, 'muro', 'VI'),
-							new Celula(id, 1, 3, 'muro', 'XL'),
-							new Celula(id, 1, 4, 'muro', 'CD'),
-							new Celula(id, 1, 5, 'grama', 'IX'),
-							new Celula(id, 1, 6, 'grama', ''),
-							new Celula(id, 1, 7, 'grama', ''),
-							new Celula(id, 1, 8, 'muro', 'IV'),
-							new Celula(id, 1, 9, 'muro', 'II')
+							new Celula(id, 1, 1, 'grama', this.getImpar()),
+							new Celula(id, 1, 2, 'muro', this.getPar()),
+							new Celula(id, 1, 3, 'muro', this.getPar()),
+							new Celula(id, 1, 4, 'muro', this.getPar()),
+							new Celula(id, 1, 5, 'grama', this.getImpar()),
+							new Celula(id, 1, 6, 'grama', this.getImpar()),
+							new Celula(id, 1, 7, 'grama', this.getImpar()),
+							new Celula(id, 1, 8, 'muro', this.getPar()),
+							new Celula(id, 1, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 2, 0, 'muro', ''),
-							new Celula(id, 2, 1, 'grama', ''),
-							new Celula(id, 2, 2, 'grama', ''),
-							new Celula(id, 2, 3, 'grama', ''),
-							new Celula(id, 2, 4, 'grama', ''),
-							new Celula(id, 2, 5, 'grama', ''),
-							new Celula(id, 2, 6, 'muro', ''),
-							new Celula(id, 2, 7, 'grama', ''),
-							new Celula(id, 2, 8, 'grama', ''),
+							new Celula(id, 2, 1, 'grama', this.getImpar()),
+							new Celula(id, 2, 2, 'grama', this.getImpar()),
+							new Celula(id, 2, 3, 'grama', this.getImpar()),
+							new Celula(id, 2, 4, 'grama', this.getImpar()),
+							new Celula(id, 2, 5, 'grama', this.getImpar()),
+							new Celula(id, 2, 6, 'muro', this.getPar()),
+							new Celula(id, 2, 7, 'grama', this.getImpar()),
+							new Celula(id, 2, 8, 'grama', this.getImpar()),
 							new Celula(id, 2, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 3, 0, 'muro', ''),
-							new Celula(id, 3, 1, 'muro', ''),
-							new Celula(id, 3, 2, 'muro', ''),
-							new Celula(id, 3, 3, 'muro', ''),
-							new Celula(id, 3, 4, 'muro', ''),
-							new Celula(id, 3, 5, 'muro', ''),
-							new Celula(id, 3, 6, 'muro', ''),
-							new Celula(id, 3, 7, 'muro', ''),
-							new Celula(id, 3, 8, 'grama', ''),
+							new Celula(id, 3, 1, 'muro', this.getPar()),
+							new Celula(id, 3, 2, 'muro', this.getPar()),
+							new Celula(id, 3, 3, 'muro', this.getPar()),
+							new Celula(id, 3, 4, 'muro', this.getPar()),
+							new Celula(id, 3, 5, 'muro', this.getPar()),
+							new Celula(id, 3, 6, 'muro', this.getPar()),
+							new Celula(id, 3, 7, 'muro', this.getPar()),
+							new Celula(id, 3, 8, 'grama', this.getImpar()),
 							new Celula(id, 3, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 4, 0, 'muro', ''),
-							new Celula(id, 4, 1, 'grama', ''),
-							new Celula(id, 4, 2, 'grama', ''),
-							new Celula(id, 4, 3, 'grama', ''),
-							new Celula(id, 4, 4, 'grama', ''),
-							new Celula(id, 4, 5, 'grama', ''),
-							new Celula(id, 4, 6, 'grama', ''),
-							new Celula(id, 4, 7, 'grama', ''),
-							new Celula(id, 4, 8, 'grama', ''),
+							new Celula(id, 4, 1, 'grama', this.getImpar()),
+							new Celula(id, 4, 2, 'grama', this.getImpar()),
+							new Celula(id, 4, 3, 'grama', this.getImpar()),
+							new Celula(id, 4, 4, 'grama', this.getImpar()),
+							new Celula(id, 4, 5, 'grama', this.getImpar()),
+							new Celula(id, 4, 6, 'grama', this.getImpar()),
+							new Celula(id, 4, 7, 'grama', this.getImpar()),
+							new Celula(id, 4, 8, 'grama', this.getImpar()),
 							new Celula(id, 4, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 5, 0, 'muro', ''),
-							new Celula(id, 5, 1, 'grama', ''),
-							new Celula(id, 5, 2, 'muro', ''),
-							new Celula(id, 5, 3, 'muro', ''),
-							new Celula(id, 5, 4, 'muro', ''),
-							new Celula(id, 5, 5, 'muro', ''),
-							new Celula(id, 5, 6, 'muro', ''),
-							new Celula(id, 5, 7, 'muro', ''),
-							new Celula(id, 5, 8, 'muro', ''),
+							new Celula(id, 5, 1, 'grama', this.getImpar()),
+							new Celula(id, 5, 2, 'muro', this.getPar()),
+							new Celula(id, 5, 3, 'muro', this.getPar()),
+							new Celula(id, 5, 4, 'muro', this.getPar()),
+							new Celula(id, 5, 5, 'muro', this.getPar()),
+							new Celula(id, 5, 6, 'muro', this.getPar()),
+							new Celula(id, 5, 7, 'muro', this.getPar()),
+							new Celula(id, 5, 8, 'muro', this.getPar()),
 							new Celula(id, 5, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 6, 0, 'muro', ''),
-							new Celula(id, 6, 1, 'grama', ''),
-							new Celula(id, 6, 2, 'grama', ''),
-							new Celula(id, 6, 3, 'grama', ''),
-							new Celula(id, 6, 4, 'grama', ''),
-							new Celula(id, 6, 5, 'muro', ''),
-							new Celula(id, 6, 6, 'grama', ''),
-							new Celula(id, 6, 7, 'grama', ''),
-							new Celula(id, 6, 8, 'grama', ''),
+							new Celula(id, 6, 1, 'grama', this.getImpar()),
+							new Celula(id, 6, 2, 'grama', this.getImpar()),
+							new Celula(id, 6, 3, 'grama', this.getImpar()),
+							new Celula(id, 6, 4, 'grama', this.getImpar()),
+							new Celula(id, 6, 5, 'muro', this.getPar()),
+							new Celula(id, 6, 6, 'grama', this.getImpar()),
+							new Celula(id, 6, 7, 'grama', this.getImpar()),
+							new Celula(id, 6, 8, 'grama', this.getImpar()),
 							new Celula(id, 6, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 7, 0, 'muro', ''),
-							new Celula(id, 7, 1, 'muro', ''),
-							new Celula(id, 7, 2, 'grama', ''),
-							new Celula(id, 7, 3, 'muro', ''),
-							new Celula(id, 7, 4, 'grama', ''),
-							new Celula(id, 7, 5, 'muro', ''),
-							new Celula(id, 7, 6, 'grama', ''),
-							new Celula(id, 7, 7, 'muro', ''),
-							new Celula(id, 7, 8, 'grama', ''),
+							new Celula(id, 7, 1, 'muro', this.getPar()),
+							new Celula(id, 7, 2, 'grama', this.getImpar()),
+							new Celula(id, 7, 3, 'muro', this.getPar()),
+							new Celula(id, 7, 4, 'grama', this.getImpar()),
+							new Celula(id, 7, 5, 'muro', this.getPar()),
+							new Celula(id, 7, 6, 'grama', this.getImpar()),
+							new Celula(id, 7, 7, 'muro', this.getPar()),
+							new Celula(id, 7, 8, 'grama', this.getImpar()),
 							new Celula(id, 7, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 8, 0, 'muro', ''),
-							new Celula(id, 8, 1, 'grama', ''),
-							new Celula(id, 8, 2, 'grama', ''),
-							new Celula(id, 8, 3, 'muro', ''),
-							new Celula(id, 8, 4, 'grama', ''),
-							new Celula(id, 8, 5, 'grama', ''),
-							new Celula(id, 8, 6, 'grama', ''),
-							new Celula(id, 8, 7, 'muro', ''),
-							new Celula(id, 8, 8, 'grama', ''),
+							new Celula(id, 8, 1, 'grama', this.getImpar()),
+							new Celula(id, 8, 2, 'grama', this.getImpar()),
+							new Celula(id, 8, 3, 'muro', this.getPar()),
+							new Celula(id, 8, 4, 'grama', this.getImpar()),
+							new Celula(id, 8, 5, 'grama', this.getImpar()),
+							new Celula(id, 8, 6, 'grama', this.getImpar()),
+							new Celula(id, 8, 7, 'muro', this.getPar()),
+							new Celula(id, 8, 8, 'grama', this.getImpar()),
 							new Celula(id, 8, 9, 'muro', '')
 						],
 						[
@@ -615,98 +616,98 @@
 						],
 						[
 							new Celula(id, 1, 0, 'muro', ''),
-							new Celula(id, 1, 1, 'grama', ''),
-							new Celula(id, 1, 2, 'grama', ''),
-							new Celula(id, 1, 3, 'grama', ''),
-							new Celula(id, 1, 4, 'muro', ''),
-							new Celula(id, 1, 5, 'muro', ''),
-							new Celula(id, 1, 6, 'muro', ''),
-							new Celula(id, 1, 7, 'muro', ''),
-							new Celula(id, 1, 8, 'grama', ''),
+							new Celula(id, 1, 1, 'grama', this.getPar()),
+							new Celula(id, 1, 2, 'grama', this.getPar()),
+							new Celula(id, 1, 3, 'grama', this.getPar()),
+							new Celula(id, 1, 4, 'muro', this.getImpar()),
+							new Celula(id, 1, 5, 'muro', this.getImpar()),
+							new Celula(id, 1, 6, 'muro', this.getImpar()),
+							new Celula(id, 1, 7, 'muro', this.getImpar()),
+							new Celula(id, 1, 8, 'grama', this.getPar()),
 							new Celula(id, 1, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 2, 0, 'muro', ''),
-							new Celula(id, 2, 1, 'grama', ''),
-							new Celula(id, 2, 2, 'muro', ''),
-							new Celula(id, 2, 3, 'grama', ''),
-							new Celula(id, 2, 4, 'grama', ''),
-							new Celula(id, 2, 5, 'grama', ''),
-							new Celula(id, 2, 6, 'grama', ''),
-							new Celula(id, 2, 7, 'grama', ''),
-							new Celula(id, 2, 8, 'grama', ''),
+							new Celula(id, 2, 1, 'grama', this.getPar()),
+							new Celula(id, 2, 2, 'muro', this.getImpar()),
+							new Celula(id, 2, 3, 'grama', this.getPar()),
+							new Celula(id, 2, 4, 'grama', this.getPar()),
+							new Celula(id, 2, 5, 'grama', this.getPar()),
+							new Celula(id, 2, 6, 'grama', this.getPar()),
+							new Celula(id, 2, 7, 'grama', this.getPar()),
+							new Celula(id, 2, 8, 'grama', this.getPar()),
 							new Celula(id, 2, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 3, 0, 'muro', ''),
-							new Celula(id, 3, 1, 'grama', ''),
-							new Celula(id, 3, 2, 'muro', ''),
-							new Celula(id, 3, 3, 'muro', ''),
-							new Celula(id, 3, 4, 'muro', ''),
-							new Celula(id, 3, 5, 'muro', ''),
-							new Celula(id, 3, 6, 'muro', ''),
-							new Celula(id, 3, 7, 'muro', ''),
-							new Celula(id, 3, 8, 'muro', ''),
+							new Celula(id, 3, 1, 'grama', this.getPar()),
+							new Celula(id, 3, 2, 'muro', this.getImpar()),
+							new Celula(id, 3, 3, 'muro', this.getImpar()),
+							new Celula(id, 3, 4, 'muro', this.getImpar()),
+							new Celula(id, 3, 5, 'muro', this.getImpar()),
+							new Celula(id, 3, 6, 'muro', this.getImpar()),
+							new Celula(id, 3, 7, 'muro', this.getImpar()),
+							new Celula(id, 3, 8, 'muro', this.getImpar()),
 							new Celula(id, 3, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 4, 0, 'muro', ''),
-							new Celula(id, 4, 1, 'grama', ''),
-							new Celula(id, 4, 2, 'grama', ''),
-							new Celula(id, 4, 3, 'grama', ''),
-							new Celula(id, 4, 4, 'grama', ''),
-							new Celula(id, 4, 5, 'grama', ''),
-							new Celula(id, 4, 6, 'grama', ''),
-							new Celula(id, 4, 7, 'grama', ''),
-							new Celula(id, 4, 8, 'grama', ''),
+							new Celula(id, 4, 1, 'grama', this.getPar()),
+							new Celula(id, 4, 2, 'grama', this.getPar()),
+							new Celula(id, 4, 3, 'grama', this.getPar()),
+							new Celula(id, 4, 4, 'grama', this.getPar()),
+							new Celula(id, 4, 5, 'grama', this.getPar()),
+							new Celula(id, 4, 6, 'grama', this.getPar()),
+							new Celula(id, 4, 7, 'grama', this.getPar()),
+							new Celula(id, 4, 8, 'grama', this.getPar()),
 							new Celula(id, 4, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 5, 0, 'muro', ''),
-							new Celula(id, 5, 1, 'muro', ''),
-							new Celula(id, 5, 2, 'grama', ''),
-							new Celula(id, 5, 3, 'muro', ''),
-							new Celula(id, 5, 4, 'muro', ''),
-							new Celula(id, 5, 5, 'muro', ''),
-							new Celula(id, 5, 6, 'muro', ''),
-							new Celula(id, 5, 7, 'muro', ''),
-							new Celula(id, 5, 8, 'grama', ''),
+							new Celula(id, 5, 1, 'muro', this.getImpar()),
+							new Celula(id, 5, 2, 'grama', this.getPar()),
+							new Celula(id, 5, 3, 'muro', this.getImpar()),
+							new Celula(id, 5, 4, 'muro', this.getImpar()),
+							new Celula(id, 5, 5, 'muro', this.getImpar()),
+							new Celula(id, 5, 6, 'muro', this.getImpar()),
+							new Celula(id, 5, 7, 'muro', this.getImpar()),
+							new Celula(id, 5, 8, 'grama', this.getPar()),
 							new Celula(id, 5, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 6, 0, 'muro', ''),
-							new Celula(id, 6, 1, 'grama', ''),
-							new Celula(id, 6, 2, 'grama', ''),
-							new Celula(id, 6, 3, 'muro', ''),
-							new Celula(id, 6, 4, 'grama', ''),
-							new Celula(id, 6, 5, 'grama', ''),
-							new Celula(id, 6, 6, 'grama', ''),
-							new Celula(id, 6, 7, 'muro', ''),
-							new Celula(id, 6, 8, 'grama', ''),
+							new Celula(id, 6, 1, 'grama', this.getPar()),
+							new Celula(id, 6, 2, 'grama', this.getPar()),
+							new Celula(id, 6, 3, 'muro', this.getImpar()),
+							new Celula(id, 6, 4, 'grama', this.getPar()),
+							new Celula(id, 6, 5, 'grama', this.getPar()),
+							new Celula(id, 6, 6, 'grama', this.getPar()),
+							new Celula(id, 6, 7, 'muro', this.getImpar()),
+							new Celula(id, 6, 8, 'grama', this.getPar()),
 							new Celula(id, 6, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 7, 0, 'muro', ''),
-							new Celula(id, 7, 1, 'muro', ''),
-							new Celula(id, 7, 2, 'muro', ''),
-							new Celula(id, 7, 3, 'muro', ''),
-							new Celula(id, 7, 4, 'grama', ''),
-							new Celula(id, 7, 5, 'muro', ''),
-							new Celula(id, 7, 6, 'grama', ''),
-							new Celula(id, 7, 7, 'muro', ''),
-							new Celula(id, 7, 8, 'grama', ''),
+							new Celula(id, 7, 1, 'muro', this.getImpar()),
+							new Celula(id, 7, 2, 'muro', this.getImpar()),
+							new Celula(id, 7, 3, 'muro', this.getImpar()),
+							new Celula(id, 7, 4, 'grama', this.getPar()),
+							new Celula(id, 7, 5, 'muro', this.getImpar()),
+							new Celula(id, 7, 6, 'grama', this.getPar()),
+							new Celula(id, 7, 7, 'muro', this.getImpar()),
+							new Celula(id, 7, 8, 'grama', this.getPar()),
 							new Celula(id, 7, 9, 'muro', '')
 						],
 						[
 							new Celula(id, 8, 0, 'muro', ''),
-							new Celula(id, 8, 1, 'grama', ''),
-							new Celula(id, 8, 2, 'grama', ''),
-							new Celula(id, 8, 3, 'grama', ''),
-							new Celula(id, 8, 4, 'grama', ''),
-							new Celula(id, 8, 5, 'muro', ''),
-							new Celula(id, 8, 6, 'grama', ''),
-							new Celula(id, 8, 7, 'grama', ''),
-							new Celula(id, 8, 8, 'grama', ''),
+							new Celula(id, 8, 1, 'grama', this.getPar()),
+							new Celula(id, 8, 2, 'grama', this.getPar()),
+							new Celula(id, 8, 3, 'grama', this.getPar()),
+							new Celula(id, 8, 4, 'grama', this.getPar()),
+							new Celula(id, 8, 5, 'muro', this.getImpar()),
+							new Celula(id, 8, 6, 'grama', this.getPar()),
+							new Celula(id, 8, 7, 'grama', this.getPar()),
+							new Celula(id, 8, 8, 'grama', this.getPar()),
 							new Celula(id, 8, 9, 'muro', '')
 						],
 						[
@@ -734,6 +735,43 @@
 						this.celulas[i][j].atualizar();
 					}
 				}
+			}
+
+			getRomanos() {
+				let romanos = { pares: [], impares: [] };
+				let letras = [
+					['', 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix'],
+					['', 'x', 'xx', 'xxx', 'xl', 'l', 'lx', 'lxx', 'lxxx', 'xc'],
+					['', 'c', 'cc', 'ccc', 'cd', 'd', 'dc', 'dcc', 'dccc', 'cM'],
+					['', 'M', 'MM', 'MMM']
+				];
+
+				for (let i = 1; i <= 3999; ++i) {
+					let montante = {valor: i, letras: '', qtd_digitos: 0, par: i % 2 == 0};
+
+					while (montante.valor) {
+						let unidade = montante.valor % 10;
+						montante.valor = Math.floor(montante.valor / 10);
+						montante.letras = letras[montante.qtd_digitos][unidade] + montante.letras;
+						++montante.qtd_digitos;
+					}
+					if (montante.letras.length < 4 && montante.par) {
+						romanos.pares.splice(Math.floor(Math.random() * (romanos.pares.length + 1)), 0, montante.letras);
+					}
+					else if (montante.letras.length < 4 && !montante.par) {
+						romanos.impares.splice(Math.floor(Math.random() * (romanos.impares.length + 1)), 0, montante.letras);
+					}
+				}
+
+				return romanos;
+			}
+
+			getPar() {
+				return this.romanos.pares.pop();
+			}
+
+			getImpar() {
+				return this.romanos.impares.pop();
 			}
 		}
 
