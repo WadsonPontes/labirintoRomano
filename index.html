@@ -583,7 +583,7 @@
 							new Celula(id, 8, 5, 'grama', this.getImpar()),
 							new Celula(id, 8, 6, 'grama', this.getImpar()),
 							new Celula(id, 8, 7, 'muro', this.getPar()),
-							new Celula(id, 8, 8, 'grama', this.getImpar()),
+							new Celula(id, 8, 8, 'grama', ''),
 							new Celula(id, 8, 9, 'muro', '')
 						],
 						[
@@ -700,7 +700,7 @@
 						],
 						[
 							new Celula(id, 8, 0, 'muro', ''),
-							new Celula(id, 8, 1, 'grama', this.getPar()),
+							new Celula(id, 8, 1, 'grama', ''),
 							new Celula(id, 8, 2, 'grama', this.getPar()),
 							new Celula(id, 8, 3, 'grama', this.getPar()),
 							new Celula(id, 8, 4, 'grama', this.getPar()),
@@ -815,6 +815,8 @@
 				this.atualizar();
 				e.animate(this.keyframes, this.timing);
 				setTimeout(() => {
+					this.tabuleiro.celulas[this.y][this.x].valor = '';
+					this.tabuleiro.celulas[this.y][this.x].atualizar();
 					this.estado = 'parado';
 					e.style.transition = 'none';
 				}, this.duracao);
@@ -866,8 +868,8 @@
 			dados.tela = nova;
 		}
 
-		function isMovimentoValido(k) {
-			return true;
+		function isMovimentoValido(k) {console.log(k);
+			return k.jogador.tabuleiro.celulas[k.jogador.y+k.y][k.jogador.x+k.x].tipo == 'grama';
 		}
 
 		function movimentar(e) {
