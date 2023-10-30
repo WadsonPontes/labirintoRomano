@@ -133,10 +133,10 @@
 			transform-origin: center;
 		}
 		#player0 {
-			background-image: url('img/player0/0.png')
+			background-image: url('img/player0/parado/0.png')
 		}
 		#player1 {
-			background-image: url('img/player1/0.png')
+			background-image: url('img/player1/parado/0.png')
 		}
 
 
@@ -175,12 +175,12 @@
 				height: calc(min(10vw, 5vh));
 			}
 			#player0 {
-				left: var(--player0-left)!important;
-				bottom: var(--player0-bottom)!important;
+				left: var(--player0-x)!important;
+				top: var(--player0-y)!important;
 			}
 			#player1 {
-				left: var(--player1-left)!important;
-				bottom: var(--player1-bottom)!important;
+				left: var(--player1-x)!important;
+				top: var(--player1-y)!important;
 			}
 		}
 	</style>
@@ -791,6 +791,37 @@
 			}
 		}
 
+		class Animacao {
+			constructor(id, nome, direcao, qtd_quadros, iteracoes) {
+				this.id = id;
+				this.nome = nome;
+				this.duracao = direcao;
+				this.iteracoes = iteracoes;
+				this.qtd_quadros = qtd_quadros;
+				this.tempo = { duration: this.duracao, iterations: this.iteracoes };
+				this.quadros = [];
+
+				for (let i = 0; i < qtd_quadros; ++i) {
+					this.quadros[i] = { backgroundImage: `url('img/player${id}/${nome}/${i}.png')` };
+				}
+				if (nome == 'caindo') {
+					for (let i = 0; i < qtd_quadros * 5; ++i) {
+						this.quadros[qtd_quadros + i] = { backgroundImage: `url('img/player${id}/${nome}/${qtd_quadros - 1}.png')` };
+					}
+				}
+			}
+		}
+
+		class Animacoes {
+			constructor(id) {
+				this.id = id;
+				const qtd_quadros = id ? 21 : 16;
+				this.parado = new Animacao(id, 'parado', 500, 1, Infinity);
+				this.andando = new Animacao(id, 'andando', 500, qtd_quadros, 1);
+				this.caindo = new Animacao(id, 'caindo', 2500, qtd_quadros, 1);
+			}
+		}
+
 		class Jogador {
 			constructor(id) {
 				this.id = id;
@@ -800,44 +831,54 @@
 				this.tabuleiro = new Tabuleiro(id);
 				this.vidas = 5;
 				this.estado = 'parado';
-				this.duracao = 500;
-				this.quadros = id ? 21 : 16;
-				this.timing = { duration: this.duracao, iterations: 1 };
-				this.keyframes = [];
-
-				for (let i = 1; i < this.quadros; ++i) {
-					this.keyframes[i-1] = { backgroundImage: `url('img/player${id}/${i}.png')` };
-				}
-
+				this.animacoes = new Animacoes(id);
 				this.atualizar();
+				elementos.jogadores[id].animate(this.animacoes.parado.quadros, this.animacoes.parado.tempo);
 			}
 
 			atualizar() {
 				const e = elementos.jogadores[this.id];
 				e.style.transform = `scaleX(${this.direcao})`;
-				if (this.id) e.style.right = `calc(min(${(9 - this.x) * 5}vw, ${(9 - this.x) * 10}vh))`;
-				else e.style.left = `calc(min(${(this.x) * 5}vw, ${this.x * 10}vh))`;
-				e.style.bottom = `calc(min(${(9 - this.y) * 5}vw, ${(9 - this.y) * 10}vh))`;
-				document.documentElement.style.setProperty(`--player${this.id}-left`, `calc(min(${(this.x) * 10}vw, ${this.x * 5}vh))`);
-				document.documentElement.style.setProperty(`--player${this.id}-bottom`, `calc(min(${(9 - this.y) * 10}vw, ${(9 - this.y) * 5}vh))`);
+				e.style.left = `calc(min(${this.x * 5}vw, ${this.x * 10}vh))`;
+				e.style.top = `calc(min(${this.y * 5}vw, ${this.y * 10}vh))`;
+				document.documentElement.style.setProperty(`--player${this.id}-x`, `calc(min(${this.x * 10}vw, ${this.x * 5}vh))`);
+				document.documentElement.style.setProperty(`--player${this.id}-y`, `calc(min(${this.y * 10}vw, ${this.y * 5}vh))`);
 			}
 
 			andar(tecla) {
 				const e = elementos.jogadores[this.id];
-				const d = this.duracao/1000;
+				const d = this.animacoes.andando.duracao/1000;
 				this.x += tecla.x;
 				this.y += tecla.y;
 				if (tecla.x) this.direcao = tecla.x;
 				this.estado = 'andando';
-				e.style.transition = `top ${d}s linear, left ${d}s linear, right ${d}s linear, bottom ${d}s linear`;
+				e.style.transition = `top ${d}s linear, left ${d}s linear`;
 				this.atualizar();
-				e.animate(this.keyframes, this.timing);
+				e.animate(this.animacoes.andando.quadros, this.animacoes.andando.tempo);
 				setTimeout(() => {
 					this.tabuleiro.celulas[this.y][this.x].valor = '';
 					this.tabuleiro.celulas[this.y][this.x].atualizar();
 					this.estado = 'parado';
 					e.style.transition = 'none';
-				}, this.duracao);
+					e.animate(this.animacoes.parado.quadros, this.animacoes.parado.tempo);
+				}, this.animacoes.andando.duracao);
+			}
+
+			cair(tecla) {
+				const e = elementos.jogadores[this.id];
+				const d = this.animacoes.caindo.duracao/1000;
+				if (tecla.x) this.direcao = tecla.x;
+				this.estado = 'caindo';
+				e.style.transition = `top ${d}s linear, left ${d}s linear`;
+				this.atualizar();
+				e.animate(this.animacoes.caindo.quadros, this.animacoes.caindo.tempo);
+				setTimeout(() => {
+					this.tabuleiro.celulas[this.y + tecla.y][this.x + tecla.x].valor = '';
+					this.tabuleiro.celulas[this.y + tecla.y][this.x + tecla.x].atualizar();
+					this.estado = 'parado';
+					e.style.transition = 'none';
+					e.animate(this.animacoes.parado.quadros, this.animacoes.parado.tempo);
+				}, this.animacoes.caindo.duracao);
 			}
 		}
 
@@ -895,6 +936,9 @@
 
 			if (k && isMovimentoValido(k) && k.jogador.estado == 'parado') {
 				k.jogador.andar(k);
+			}
+			else if (k && !isMovimentoValido(k) && k.jogador.estado == 'parado') {
+				k.jogador.cair(k);
 			}
 		}
 
