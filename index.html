@@ -144,17 +144,6 @@
 
 
 		
-		.name {
-			color: #FF5050;
-			text-align: center;
-			margin: 25px;
-			padding: 5px;
-			background-color: rgba(255, 255, 255, 0.3);
-		}
-		.vidas {
-			width: 150px;
-			margin: -15px 25px 25px 25px;
-		}
 		#botao-back {
 			top: 500px;
 			left: 0;
@@ -329,11 +318,6 @@
 			<div id="c-0-9-9" class="celula"></div>
 
 			<div id="player0" class="player"></div>
-
-			<div id="status0" class="status">
-				<div id="name0" class="name">gaRoto</div>
-				<img id="vidas0" class="vidas" src="img/status/vida5.png">
-			</div>
 		</div>
 
 		<div id="tabuleiro1" class="tabuleiro">
@@ -448,11 +432,6 @@
 			<div id="c-1-9-9" class="celula"></div>
 
 			<div id="player1" class="player"></div>
-
-			<div id="status1" class="status">
-				<div id="name1" class="name">gaRota</div>
-				<img id="vidas1" class="vidas" src="img/status/vida5.png">
-			</div>
 		</div>
 	</div>
 
@@ -483,7 +462,8 @@
 
 			atualizar() {
 				const e = elementos.celulas[this.id][this.x][this.y];
-				e.style.backgroundImage = `url('img/board/${this.tipo}.png')`;
+				if (this.valor && this.valor != '') e.style.backgroundImage = `url('img/board/chao.png')`;
+				else e.style.backgroundImage = `url('img/board/${this.tipo}.png')`;
 				e.textContent = this.valor;
 			}
 		}
@@ -805,8 +785,10 @@
 					this.quadros[i] = { backgroundImage: `url('img/player${id}/${nome}/${i}.png')` };
 				}
 				if (nome == 'caindo') {
-					for (let i = 0; i < qtd_quadros * 5; ++i) {
-						this.quadros[qtd_quadros + i] = { backgroundImage: `url('img/player${id}/${nome}/${qtd_quadros - 1}.png')` };
+					for (let i = 0; i < qtd_quadros; ++i) {
+						for (let j = 0; j < 4; ++j) { 
+							this.quadros[qtd_quadros + j + (i * 4)] = { backgroundImage: `url('img/player${id}/${nome}/${qtd_quadros + (i % 6)}.png')` };
+						}
 					}
 				}
 			}
@@ -852,12 +834,12 @@
 				this.y += tecla.y;
 				if (tecla.x) this.direcao = tecla.x;
 				this.estado = 'andando';
+				this.tabuleiro.celulas[this.y][this.x].valor = '';
+				this.tabuleiro.celulas[this.y][this.x].atualizar();
 				e.style.transition = `top ${d}s linear, left ${d}s linear`;
 				this.atualizar();
 				e.animate(this.animacoes.andando.quadros, this.animacoes.andando.tempo);
 				setTimeout(() => {
-					this.tabuleiro.celulas[this.y][this.x].valor = '';
-					this.tabuleiro.celulas[this.y][this.x].atualizar();
 					this.estado = 'parado';
 					e.style.transition = 'none';
 					e.animate(this.animacoes.parado.quadros, this.animacoes.parado.tempo);
@@ -869,12 +851,12 @@
 				const d = this.animacoes.caindo.duracao/1000;
 				if (tecla.x) this.direcao = tecla.x;
 				this.estado = 'caindo';
+				this.tabuleiro.celulas[this.y + tecla.y][this.x + tecla.x].valor = '';
+				this.tabuleiro.celulas[this.y + tecla.y][this.x + tecla.x].atualizar();
 				e.style.transition = `top ${d}s linear, left ${d}s linear`;
 				this.atualizar();
 				e.animate(this.animacoes.caindo.quadros, this.animacoes.caindo.tempo);
 				setTimeout(() => {
-					this.tabuleiro.celulas[this.y + tecla.y][this.x + tecla.x].valor = '';
-					this.tabuleiro.celulas[this.y + tecla.y][this.x + tecla.x].atualizar();
 					this.estado = 'parado';
 					e.style.transition = 'none';
 					e.animate(this.animacoes.parado.quadros, this.animacoes.parado.tempo);
@@ -931,13 +913,17 @@
 			return k.jogador.tabuleiro.celulas[k.jogador.y+k.y][k.jogador.x+k.x].tipo == 'grama';
 		}
 
+		function isBateuNaParede(k) {
+			return k.jogador.tabuleiro.celulas[k.jogador.y+k.y][k.jogador.x+k.x].valor != '';
+		}
+
 		function movimentar(e) {
 			const k = dados.teclas[e.code];
 
 			if (k && isMovimentoValido(k) && k.jogador.estado == 'parado') {
 				k.jogador.andar(k);
 			}
-			else if (k && !isMovimentoValido(k) && k.jogador.estado == 'parado') {
+			else if (k && isBateuNaParede(k) && k.jogador.estado == 'parado') {
 				k.jogador.cair(k);
 			}
 		}
