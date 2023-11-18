@@ -785,9 +785,10 @@
 					this.quadros[i] = { backgroundImage: `url('img/jogador${id}/${nome}/${i}.png')` };
 				}
 				if (nome == 'caindo') {
-					for (let i = 0; i < qtd_quadros; ++i) {
-						for (let j = 0; j < 4; ++j) { 
-							this.quadros[qtd_quadros + j + (i * 4)] = { backgroundImage: `url('img/jogador${id}/${nome}/${qtd_quadros + (i % 6)}.png')` };
+					for (let i = 0; i < qtd_quadros * (id ? 2 : 3); ++i) {
+						const r = id ? 4 : 2;
+						for (let j = 0; j < r; ++j) { // Repete o mesmo frame 4 vezes para manter a mesma velocidade na animação
+							this.quadros[qtd_quadros + j + (i * r)] = { backgroundImage: `url('img/jogador${id}/${nome}/${qtd_quadros + (i % 6)}.png')` };
 						}
 					}
 				}
@@ -797,10 +798,9 @@
 		class Animacoes {
 			constructor(id) {
 				this.id = id;
-				const qtd_quadros = id ? 21 : 16;
 				this.parado = new Animacao(id, 'parado', 500, 1, Infinity);
-				this.andando = new Animacao(id, 'andando', 500, qtd_quadros, 1);
-				this.caindo = new Animacao(id, 'caindo', 2500, qtd_quadros, 1);
+				this.andando = new Animacao(id, 'andando', 500, (id ? 21 : 16), 1);
+				this.caindo = new Animacao(id, 'caindo', 5000, (id ? 31 : 16), 1);
 			}
 		}
 
