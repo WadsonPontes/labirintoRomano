@@ -27,6 +27,11 @@
 		.desativado {
 			display: none!important;
 		}
+		.fora {
+			position: fixed;
+			left: 100vw;
+			top: 100vh;
+		}
 		/* MENU PRINCIPAL */
 		#inicial, #regras, #partida {
 			display: flex;
@@ -175,7 +180,157 @@
 	</style>
 </head>
 <body>
-	<div id="preload" class="desativado"><img src="img/celulas/muro.png"><img src="img/celulas/porta.png"><img src="img/celulas/grama.png"><img src="img/menu/logo.png"><img src="img/menu/victory1.png"><img src="img/menu/victory2.png"><img src="img/jogador1/0.png"><img src="img/jogador2/0.png"><img src="img/status/vida0.png"><img src="img/status/vida1.png"><img src="img/status/vida2.png"><img src="img/status/vida3.png"><img src="img/status/vida4.png"><img src="img/status/vida5.png"></div>
+	<div id="precarregamento" class="fora">
+		<div id="pre-celulas">
+			<img src="img/celulas/chao.png">
+			<img src="img/celulas/grama.png">
+			<img src="img/celulas/muro.png">
+			<img src="img/celulas/porta.png">
+		</div>
+		<div id="pre-jogador0">
+			<div id="pre-jogador0-andando">
+				<img src="img/jogador0/andando/0.png">
+				<img src="img/jogador0/andando/1.png">
+				<img src="img/jogador0/andando/2.png">
+				<img src="img/jogador0/andando/3.png">
+				<img src="img/jogador0/andando/4.png">
+				<img src="img/jogador0/andando/5.png">
+				<img src="img/jogador0/andando/6.png">
+				<img src="img/jogador0/andando/7.png">
+				<img src="img/jogador0/andando/8.png">
+				<img src="img/jogador0/andando/9.png">
+				<img src="img/jogador0/andando/10.png">
+				<img src="img/jogador0/andando/11.png">
+				<img src="img/jogador0/andando/12.png">
+				<img src="img/jogador0/andando/13.png">
+				<img src="img/jogador0/andando/14.png">
+				<img src="img/jogador0/andando/15.png">
+			</div>
+			<div id="pre-jogador0-caindo">
+				<img src="img/jogador0/caindo/0.png">
+				<img src="img/jogador0/caindo/1.png">
+				<img src="img/jogador0/caindo/2.png">
+				<img src="img/jogador0/caindo/3.png">
+				<img src="img/jogador0/caindo/4.png">
+				<img src="img/jogador0/caindo/5.png">
+				<img src="img/jogador0/caindo/6.png">
+				<img src="img/jogador0/caindo/7.png">
+				<img src="img/jogador0/caindo/8.png">
+				<img src="img/jogador0/caindo/9.png">
+				<img src="img/jogador0/caindo/10.png">
+				<img src="img/jogador0/caindo/11.png">
+				<img src="img/jogador0/caindo/12.png">
+				<img src="img/jogador0/caindo/13.png">
+				<img src="img/jogador0/caindo/14.png">
+				<img src="img/jogador0/caindo/15.png">
+				<img src="img/jogador0/caindo/16.png">
+				<img src="img/jogador0/caindo/17.png">
+				<img src="img/jogador0/caindo/18.png">
+				<img src="img/jogador0/caindo/19.png">
+				<img src="img/jogador0/caindo/20.png">
+				<img src="img/jogador0/caindo/21.png">
+			</div>
+			<div id="pre-jogador0-parado">
+				<img src="img/jogador0/parado/0.png">
+				<img src="img/jogador0/parado/1.png">
+				<img src="img/jogador0/parado/2.png">
+				<img src="img/jogador0/parado/3.png">
+				<img src="img/jogador0/parado/4.png">
+				<img src="img/jogador0/parado/5.png">
+				<img src="img/jogador0/parado/6.png">
+				<img src="img/jogador0/parado/7.png">
+				<img src="img/jogador0/parado/8.png">
+				<img src="img/jogador0/parado/9.png">
+				<img src="img/jogador0/parado/10.png">
+				<img src="img/jogador0/parado/11.png">
+				<img src="img/jogador0/parado/12.png">
+				<img src="img/jogador0/parado/13.png">
+				<img src="img/jogador0/parado/14.png">
+			</div>
+		</div>
+		<div id="pre-jogador1">
+			<div id="pre-jogador1-andando">
+				<img src="img/jogador1/andando/0.png">
+				<img src="img/jogador1/andando/1.png">
+				<img src="img/jogador1/andando/2.png">
+				<img src="img/jogador1/andando/3.png">
+				<img src="img/jogador1/andando/4.png">
+				<img src="img/jogador1/andando/5.png">
+				<img src="img/jogador1/andando/6.png">
+				<img src="img/jogador1/andando/7.png">
+				<img src="img/jogador1/andando/8.png">
+				<img src="img/jogador1/andando/9.png">
+				<img src="img/jogador1/andando/10.png">
+				<img src="img/jogador1/andando/11.png">
+				<img src="img/jogador1/andando/12.png">
+				<img src="img/jogador1/andando/13.png">
+				<img src="img/jogador1/andando/14.png">
+				<img src="img/jogador1/andando/15.png">
+				<img src="img/jogador1/andando/16.png">
+				<img src="img/jogador1/andando/17.png">
+				<img src="img/jogador1/andando/18.png">
+				<img src="img/jogador1/andando/19.png">
+				<img src="img/jogador1/andando/20.png">
+			</div>
+			<div id="pre-jogador1-caindo">
+				<img src="img/jogador1/caindo/0.png">
+				<img src="img/jogador1/caindo/1.png">
+				<img src="img/jogador1/caindo/2.png">
+				<img src="img/jogador1/caindo/3.png">
+				<img src="img/jogador1/caindo/4.png">
+				<img src="img/jogador1/caindo/5.png">
+				<img src="img/jogador1/caindo/6.png">
+				<img src="img/jogador1/caindo/7.png">
+				<img src="img/jogador1/caindo/8.png">
+				<img src="img/jogador1/caindo/9.png">
+				<img src="img/jogador1/caindo/10.png">
+				<img src="img/jogador1/caindo/11.png">
+				<img src="img/jogador1/caindo/12.png">
+				<img src="img/jogador1/caindo/13.png">
+				<img src="img/jogador1/caindo/14.png">
+				<img src="img/jogador1/caindo/15.png">
+				<img src="img/jogador1/caindo/16.png">
+				<img src="img/jogador1/caindo/17.png">
+				<img src="img/jogador1/caindo/18.png">
+				<img src="img/jogador1/caindo/19.png">
+				<img src="img/jogador1/caindo/20.png">
+				<img src="img/jogador1/caindo/21.png">
+				<img src="img/jogador1/caindo/22.png">
+				<img src="img/jogador1/caindo/23.png">
+				<img src="img/jogador1/caindo/24.png">
+				<img src="img/jogador1/caindo/25.png">
+				<img src="img/jogador1/caindo/26.png">
+				<img src="img/jogador1/caindo/27.png">
+				<img src="img/jogador1/caindo/28.png">
+				<img src="img/jogador1/caindo/29.png">
+				<img src="img/jogador1/caindo/30.png">
+				<img src="img/jogador1/caindo/31.png">
+				<img src="img/jogador1/caindo/32.png">
+				<img src="img/jogador1/caindo/33.png">
+				<img src="img/jogador1/caindo/34.png">
+				<img src="img/jogador1/caindo/35.png">
+				<img src="img/jogador1/caindo/36.png">
+			</div>
+			<div id="pre-jogador1-parado">
+				<img src="img/jogador1/parado/0.png">
+				<img src="img/jogador1/parado/1.png">
+				<img src="img/jogador1/parado/2.png">
+				<img src="img/jogador1/parado/3.png">
+				<img src="img/jogador1/parado/4.png">
+				<img src="img/jogador1/parado/5.png">
+				<img src="img/jogador1/parado/6.png">
+				<img src="img/jogador1/parado/7.png">
+				<img src="img/jogador1/parado/8.png">
+				<img src="img/jogador1/parado/9.png">
+				<img src="img/jogador1/parado/10.png">
+				<img src="img/jogador1/parado/11.png">
+				<img src="img/jogador1/parado/12.png">
+				<img src="img/jogador1/parado/13.png">
+				<img src="img/jogador1/parado/14.png">
+				<img src="img/jogador1/parado/15.png">
+			</div>
+		</div>
+	</div>
 	
 	<div id="inicial">
 		<img id="logo" src="img/menu/logo.png">
@@ -798,7 +953,7 @@
 		class Animacoes {
 			constructor(id) {
 				this.id = id;
-				this.parado = new Animacao(id, 'parado', 500, 1, Infinity);
+				this.parado = new Animacao(id, 'parado', 500, (id ? 16 : 15), Infinity);
 				this.andando = new Animacao(id, 'andando', 500, (id ? 21 : 16), 1);
 				this.caindo = new Animacao(id, 'caindo', 5000, (id ? 31 : 16), 1);
 			}
