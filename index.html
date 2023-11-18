@@ -125,18 +125,18 @@
 			font-size: calc(min(2vw, 2vh));
 			background-size: cover;
 		}
-		.player {
+		.jogador {
 			position: absolute;
 			width: calc(min(5vw, 10vh));
 			height: calc(min(5vw, 10vh));
 			background-size: cover;
 			transform-origin: center;
 		}
-		#player0 {
-			background-image: url('img/player0/parado/0.png')
+		#jogador0 {
+			background-image: url('img/jogador0/parado/0.png')
 		}
-		#player1 {
-			background-image: url('img/player1/parado/0.png')
+		#jogador1 {
+			background-image: url('img/jogador1/parado/0.png')
 		}
 
 
@@ -159,23 +159,23 @@
 				grid-template-rows: repeat(10, calc(min(10vw, 5vh)));
 				position: relative;
 			}
-			.player {
+			.jogador {
 				width: calc(min(10vw, 5vh));
 				height: calc(min(10vw, 5vh));
 			}
-			#player0 {
-				left: var(--player0-x)!important;
-				top: var(--player0-y)!important;
+			#jogador0 {
+				left: var(--jogador0-x)!important;
+				top: var(--jogador0-y)!important;
 			}
-			#player1 {
-				left: var(--player1-x)!important;
-				top: var(--player1-y)!important;
+			#jogador1 {
+				left: var(--jogador1-x)!important;
+				top: var(--jogador1-y)!important;
 			}
 		}
 	</style>
 </head>
 <body>
-	<div id="preload" class="desativado"><img src="img/board/muro.png"><img src="img/board/porta.png"><img src="img/board/grama.png"><img src="img/menu/logo.png"><img src="img/menu/victory1.png"><img src="img/menu/victory2.png"><img src="img/player1/0.png"><img src="img/player2/0.png"><img src="img/status/vida0.png"><img src="img/status/vida1.png"><img src="img/status/vida2.png"><img src="img/status/vida3.png"><img src="img/status/vida4.png"><img src="img/status/vida5.png"></div>
+	<div id="preload" class="desativado"><img src="img/celulas/muro.png"><img src="img/celulas/porta.png"><img src="img/celulas/grama.png"><img src="img/menu/logo.png"><img src="img/menu/victory1.png"><img src="img/menu/victory2.png"><img src="img/jogador1/0.png"><img src="img/jogador2/0.png"><img src="img/status/vida0.png"><img src="img/status/vida1.png"><img src="img/status/vida2.png"><img src="img/status/vida3.png"><img src="img/status/vida4.png"><img src="img/status/vida5.png"></div>
 	
 	<div id="inicial">
 		<img id="logo" src="img/menu/logo.png">
@@ -317,7 +317,7 @@
 			<div id="c-0-9-8" class="celula"></div>
 			<div id="c-0-9-9" class="celula"></div>
 
-			<div id="player0" class="player"></div>
+			<div id="jogador0" class="jogador"></div>
 		</div>
 
 		<div id="tabuleiro1" class="tabuleiro">
@@ -431,7 +431,7 @@
 			<div id="c-1-9-8" class="celula"></div>
 			<div id="c-1-9-9" class="celula"></div>
 
-			<div id="player1" class="player"></div>
+			<div id="jogador1" class="jogador"></div>
 		</div>
 	</div>
 
@@ -446,7 +446,7 @@
 				this.inicial = document.querySelector('#inicial');
 				this.regras = document.querySelector('#regras');
 				this.partida = document.querySelector('#partida');
-				this.jogadores = [document.querySelector('#player0'), document.querySelector('#player1')];
+				this.jogadores = [document.querySelector('#jogador0'), document.querySelector('#jogador1')];
 				this.celulas = [];
 			}
 		}
@@ -462,8 +462,8 @@
 
 			atualizar() {
 				const e = elementos.celulas[this.id][this.x][this.y];
-				if (this.valor && this.valor != '') e.style.backgroundImage = `url('img/board/chao.png')`;
-				else e.style.backgroundImage = `url('img/board/${this.tipo}.png')`;
+				if (this.valor && this.valor != '') e.style.backgroundImage = `url('img/celulas/chao.png')`;
+				else e.style.backgroundImage = `url('img/celulas/${this.tipo}.png')`;
 				e.textContent = this.valor;
 			}
 		}
@@ -782,12 +782,12 @@
 				this.quadros = [];
 
 				for (let i = 0; i < qtd_quadros; ++i) {
-					this.quadros[i] = { backgroundImage: `url('img/player${id}/${nome}/${i}.png')` };
+					this.quadros[i] = { backgroundImage: `url('img/jogador${id}/${nome}/${i}.png')` };
 				}
 				if (nome == 'caindo') {
 					for (let i = 0; i < qtd_quadros; ++i) {
 						for (let j = 0; j < 4; ++j) { 
-							this.quadros[qtd_quadros + j + (i * 4)] = { backgroundImage: `url('img/player${id}/${nome}/${qtd_quadros + (i % 6)}.png')` };
+							this.quadros[qtd_quadros + j + (i * 4)] = { backgroundImage: `url('img/jogador${id}/${nome}/${qtd_quadros + (i % 6)}.png')` };
 						}
 					}
 				}
@@ -823,8 +823,8 @@
 				e.style.transform = `scaleX(${this.direcao})`;
 				e.style.left = `calc(min(${this.x * 5}vw, ${this.x * 10}vh))`;
 				e.style.top = `calc(min(${this.y * 5}vw, ${this.y * 10}vh))`;
-				document.documentElement.style.setProperty(`--player${this.id}-x`, `calc(min(${this.x * 10}vw, ${this.x * 5}vh))`);
-				document.documentElement.style.setProperty(`--player${this.id}-y`, `calc(min(${this.y * 10}vw, ${this.y * 5}vh))`);
+				document.documentElement.style.setProperty(`--jogador${this.id}-x`, `calc(min(${this.x * 10}vw, ${this.x * 5}vh))`);
+				document.documentElement.style.setProperty(`--jogador${this.id}-y`, `calc(min(${this.y * 10}vw, ${this.y * 5}vh))`);
 			}
 
 			andar(tecla) {
