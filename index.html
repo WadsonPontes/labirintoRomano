@@ -32,16 +32,6 @@
 			left: 100vw;
 			top: 100vh;
 		}
-		/* MENU PRINCIPAL */
-		#inicial, #regras, #partida {
-			display: flex;
-			flex-wrap: wrap;
-			flex-direction: column;
-			justify-content: center;
-			align-content: center;
-			width: 100vw;
-			height: 100vh;
-		}
 		.botao {
 			max-width: 100vw;
 			padding: 15px 40px;
@@ -62,6 +52,16 @@
 			border-bottom: 7px solid #3EB060;
 			background-color: #70E292;
 		}
+		#inicial, #regras, #partida, #resultado {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			justify-content: center;
+			align-content: center;
+			width: 100vw;
+			height: 100vh;
+		}
+		/* MENU PRINCIPAL */
 		#logo {
 			max-width: 100vw;
 			max-height: 60vh;
@@ -94,20 +94,6 @@
 		/* PARTIDA */
 		#partida {
 			justify-content: end;
-		}
-		.status {
-			position: fixed;
-			top: 0;
-			font-size: 25px;
-			z-index: 1;
-		}
-		#status0 {
-			left: 0;
-  			text-align: left;
-		}
-		#status1 {
-			right: 0;
-  			text-align: right;
 		}
 		.tabuleiro {
 			display: grid;
@@ -143,18 +129,13 @@
 		#jogador1 {
 			background-image: url('img/jogador1/parado/0.png')
 		}
-
-
-		
-
-
-		
-		#botao-back {
-			top: 500px;
-			left: 0;
-			right: 0;
-			margin: auto;
-			font-size: 50px;
+		/* RESULTADO */
+		#ganhador {
+			max-width: 100vw;
+			max-height: 60vh;
+		}
+		#botao-voltar {
+			margin: 10vh auto 5vh auto;
 		}
 
 		@media (orientation: portrait) {
@@ -590,9 +571,9 @@
 		</div>
 	</div>
 
-	<div id="game-over" class="game-over desativado">
-		<img id="victory" class="imagem" src="img/menu/victory1.png">
-		<input id="botao-back" class="botao" type="button" value="back" onclick="voltar()">
+	<div id="resultado" class="desativado">
+		<img id="ganhador" src="img/menu/vitoria-jogador0.png">
+		<button id="botao-voltar" class="botao" onclick="eventoPrecionado()">voltar</button>
 	</div>
 
 	<script>
@@ -601,7 +582,9 @@
 				this.inicial = document.querySelector('#inicial');
 				this.regras = document.querySelector('#regras');
 				this.partida = document.querySelector('#partida');
+				this.resultado = document.querySelector('#resultado');
 				this.jogadores = [document.querySelector('#jogador0'), document.querySelector('#jogador1')];
+				this.ganhador = document.querySelector('#ganhador');
 				this.celulas = [];
 			}
 		}
@@ -966,7 +949,6 @@
 				this.y = 8;
 				this.direcao = id ? -1 : 1;
 				this.tabuleiro = new Tabuleiro(id);
-				this.vidas = 5;
 				this.estado = 'parado';
 				this.animacoes = new Animacoes(id);
 				this.atualizar();
@@ -1047,12 +1029,13 @@
 				this.tela = 'inicial';
 				this.jogador0 = new Jogador(0);
 				this.jogador1 = new Jogador(1);
+				this.ganhador = null;
 				this.teclas = new Teclas(this.jogador0, this.jogador1);
 			}
 		}
 
-		const elementos = new Elementos();
-		const dados = new Dados();
+		let elementos = new Elementos();
+		let dados = new Dados();
 		
 		function isTelaConfirmacao(e) {
 			return e == null || e.code == 'Enter' || e.code == 'Space';
@@ -1072,6 +1055,10 @@
 			return k.jogador.tabuleiro.celulas[k.jogador.y+k.y][k.jogador.x+k.x].valor != '';
 		}
 
+		function isPorta(k) {
+			return k.jogador.tabuleiro.celulas[k.jogador.y+k.y][k.jogador.x+k.x].tipo == 'porta';
+		}
+
 		function movimentar(e) {
 			const k = dados.teclas[e.code];
 
@@ -1080,6 +1067,11 @@
 			}
 			else if (k && isBateuNaParede(k) && k.jogador.estado == 'parado') {
 				k.jogador.cair(k);
+			}
+			else if (k && isPorta(k) && k.jogador.estado == 'parado') {
+				dados.ganhador = k.jogador;
+				elementos.ganhador.src = `img/menu/vitoria-jogador${k.jogador.id}.png`;
+				trocarTela('resultado');
 			}
 		}
 
@@ -1093,38 +1085,11 @@
 			else if (dados.tela == 'partida') {
 				movimentar(e);
 			}
-		}
-
-
-
-
-
-		function gameOver(campo, resultado) {
-			if (resultado == "vitoria") {
-				img_wins.src = "img/menu/victory" + campo.id + ".png";
+			else if (dados.tela == 'resultado' && isTelaConfirmacao(e)) {
+				elementos = new Elementos();
+				dados = new Dados();
+				trocarTela('inicial');
 			}
-			else {
-				img_wins.src = "img/menu/victory" + (3 - campo.id) + ".png";
-			}
-			estado = "game_over";
-			partida.classList.add("desativado");
-			game_over.classList.remove("desativado");
-
-			for (let k = 1; k < 3; k++) {
-				for (let i = 0; i < 8; i++) {
-					for (let j = 0; j < 10; j++) {
-						document.getElementById("casa" + k + i + j).innerHTML = "";
-						document.getElementById("casa" + k + i + j).classList.remove("verde");
-						document.getElementById("casa" + k + i + j).classList.remove("vermelho");
-					}
-				}
-				img_vidas[k].src = "img/status/vida5.png";
-			}
-		}
-
-		function voltar() {
-			menu.classList.remove("desativado");
-			game_over.classList.add("desativado");
 		}
 
 		window.addEventListener("keydown", eventoPrecionado);
