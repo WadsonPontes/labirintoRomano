@@ -81,8 +81,26 @@
 			font-size: 40px;
 			text-align: center;
 		}
-		#texto {
+		#conteudo {
+			display: flex;
+			flex-wrap: wrap;
+			text-align: center;
+		}
+		.texto {
+			flex: 1;
 			font-size: 20px;
+			margin: 0 calc(min(1vw, 2vh));
+		}
+		.imagem-texto {
+			margin-top: calc(min(1vw, 2vh));
+			height: calc(min(5vw, 10vh));
+		}
+		#condicao-vitoria {
+			flex-basis: 100%;
+			margin-top: calc(min(5vw, 10vh));
+		}
+		strong {
+			color: chartreuse;
 		}
 		#botao-ok {
 			position: absolute;
@@ -323,17 +341,20 @@
 			<div id="titulo">RegRas</div>
 			<br/>
 			<br/>
-			<div id="texto">
-				o gaRoto deve aNdaR poR casas PaRes com as teclas Wasd
-				<br/>
-				<br/>
-				a gaRota deve aNdaR PoR casas iMPaRes coM as setas do teclado
-				<br/>
-				<br/>
-				PeRde queM ficaR seM vida
-				<br/>
-				<br/>
-				gaNha queM eNcoNtRaR a saida PRiMeiRo ou sobReviveR
+			<div id="conteudo">
+				<div class="texto">
+					<img class="imagem-texto" src="img/menu/garoto.png">
+					o gaRoto deve aNdaR poR casas <strong>PaRes</strong> coM as teclas Wasd
+					<br/><img class="imagem-texto" src="img/menu/wasd.png">
+				</div>
+				<div class="texto">
+					<img class="imagem-texto" src="img/menu/garota.png">
+					a gaRota deve aNdaR PoR casas <strong>iMPaRes</strong> coM as setas do teclado
+					<br/><img class="imagem-texto" src="img/menu/direcionais.png">
+				</div>
+				<div id="condicao-vitoria" class="texto">
+					gaNha queM sair PRiMeiRo do labiRiNto
+				</div>
 			</div>
 			<br/>
 			<br/>
